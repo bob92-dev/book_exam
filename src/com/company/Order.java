@@ -1,15 +1,17 @@
 package com.company;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Order {
 
     /**
      * initialization of our programm. No return. Order the help function
      */
-    public static void init() {
+    public static void init() throws IOException {
 
         System.out.println(
                 "                                  |---------------------------------------|\n" +
@@ -18,7 +20,9 @@ public class Order {
 
 
         Order.help();
-
+        // creation du fichier d'enregistrement des données
+        FilesHandler file = new FilesHandler();
+        file.createFile();
     }
 
 
@@ -50,20 +54,23 @@ public class Order {
     public static void processCmd(int cmdNumber, Map usersMap) throws LibraryException {
 
         // TODO : faire le try catch comme demandé dans le backlog des commandes
-        try {
+        try     {
             switch (cmdNumber) {
                 case 1:
                     System.out.println("help case");
                     //TODO  lister toutes les commandes de l'application
                     Order.help();
                     break;
-                //case 2 : etc.
+
                 case 2:
                     System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
                     break;
+
                 case 3:
-                    BookSituation situationBook = new BookSituation(usersMap);
-                    situationBook.addUser(usersMap);
+                    //IAddIt = new (usersMap)
+                    // DataBase situationBook = ;
+                    //situationBook.addUser(usersMap);
+
             }
 
 

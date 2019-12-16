@@ -1,8 +1,10 @@
 package com.company;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public class Books {
+public class Books implements IAddIt {
     private String title;
     private int publishedYear;
     private String editorName;
@@ -85,5 +87,24 @@ public class Books {
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getPublishedYear(), getEditorName(), getReference());
+    }
+
+    // that's our addbook
+    // TODO fonction à revoir
+    @Override
+    public Map addIt(Map bookMap, Map borrowedMap) throws LibraryException {
+        // d'abord chercher si la référence est prèsente dans borrow
+        // si la référence de l'objet n'existe pas, on la crée dans une liste
+        Books book = new Books(title, publishedYear, editorName, reference);
+        // s'il ne contient pas le livre à la réference
+        if (!borrowedMap.containsKey(book.getReference())){
+            bookMap.put(book.getReference(), book);
+        }
+        //TODO gerer lexecption
+        // lexception ne fonctionne pas
+        //else {
+        //    throw new LibraryException("ce livre existe déjà");
+        //}
+        return bookMap;
     }
 }

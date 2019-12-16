@@ -1,8 +1,9 @@
 package com.company;
 
+import java.util.Map;
 import java.util.Objects;
 
-public class Borrows {
+public class Borrows implements IAddIt{
     private String borrowerName;
     private String borrowerFirstName;
     private String bookReference;
@@ -92,5 +93,10 @@ public class Borrows {
     @Override
     public int hashCode() {
         return Objects.hash(getBorrowerName(), getBorrowerFirstName(), getBookReference(), getBorrowDate(), getBorrowReturn());
+    }
+
+    @Override
+    public Map addIt(Map usersMap, Map borrowedMap) {
+        return null;
     }
 }
