@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Tools {
@@ -11,21 +12,27 @@ public class Tools {
 
 
 //TODO : gestion de l'exception à vérifier
-
     public static int getChoice() throws LibraryException {
 
         int choice;
+        System.out.println("\n" +
+                "=> Please enter a command : \n");
 
-        System.out.println("Enter a number : ");
         Scanner sc = new Scanner(System.in);
 
         try {
             choice = sc.nextInt();
-        }
-        catch(Exception e){
-            throw new LibraryException("Please try another number",e.getCause());
+        } catch (Exception e) {
+            throw new LibraryException("Please try another number", e.getCause());
         }
 
         return choice;
     }
+
+
 }
+        //try {
+
+        //}
+        //catch(Exception e){
+          //  throw new LibraryException("Please try another number",e.getCause());
