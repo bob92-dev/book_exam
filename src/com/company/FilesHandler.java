@@ -13,9 +13,9 @@ public class FilesHandler {
      * this method create the database, as a csv file (if it doesn't exist). It is called in the init function.
      * @throws IOException
      */
-    public void createFile () throws IOException {
+    public void createFile (String databaseName) throws IOException {
 
-        File database = new File("database.csv");
+        File database = new File(databaseName+".csv");
         // check if the file exist
         if(!database.exists()){
 
@@ -32,10 +32,10 @@ public class FilesHandler {
     /**
      * this method read the database.
      */
-    public void readFile() {
+    public void readFile(String databaseName) {
 
         try {
-            File f = new File("database.csv");
+            File f = new File(databaseName+".csv");
             Scanner myReader = new Scanner(f);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -54,10 +54,10 @@ public class FilesHandler {
      * this method is build for writing and saving our data in our database.csv
      * @param myDataMap
      */
-    public void writeInFile(Map myDataMap){
+    public void writeInFile(Map myDataMap, String databaseName){
 
         try {
-            FileWriter myWriter = new FileWriter("database.csv");
+            FileWriter myWriter = new FileWriter(databaseName+".csv");
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(myDataMap));
             myWriter.close();

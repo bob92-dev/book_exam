@@ -9,9 +9,13 @@ import java.util.Map;
 public class Order {
 
     /**
-     * initialization of our programm. No return. Order the help function
+     * initialization of our programm. No return. Order the help function and create the database
      */
     public static void init() throws IOException {
+        //give name at our databases. The file creater need it.
+        String usersDatabase = "usersDatabase";
+        String borrowersDatabase= "borrowersDatabase";
+        String booksDatabase = "booksDatabase";
 
         System.out.println(
                 "                                  |---------------------------------------|\n" +
@@ -20,9 +24,12 @@ public class Order {
 
 
         Order.help();
-        // creation du fichier d'enregistrement des données
+
+        // creation des fichiers d'enregistrement des données
         FilesHandler file = new FilesHandler();
-        file.createFile();
+        file.createFile(usersDatabase);
+        file.createFile(borrowersDatabase);
+        file.createFile(booksDatabase);
     }
 
 
@@ -51,7 +58,7 @@ public class Order {
 
 
     // this function make the bridge between the typing and the process
-    public static void processCmd(int cmdNumber, Map usersMap) throws LibraryException {
+    public static void processCmd(int cmdNumber, Map usersMap, Map borrowedMap) throws LibraryException {
 
         // TODO : faire le try catch comme demandé dans le backlog des commandes
         try     {
@@ -67,7 +74,7 @@ public class Order {
                     break;
 
                 case 3:
-                    //IAddIt = new (usersMap)
+                   
                     // DataBase situationBook = ;
                     //situationBook.addUser(usersMap);
 
