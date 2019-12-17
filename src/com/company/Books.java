@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -92,19 +93,22 @@ public class Books implements IAddIt {
     // that's our addbook
     // TODO fonction à revoir
     @Override
-    public Map addIt(Map bookMap, Map borrowedMap) throws LibraryException {
+   public Map addIt(Map bookMap, Map borrowedMap) throws IOException {
         // d'abord chercher si la référence est prèsente dans borrow
         // si la référence de l'objet n'existe pas, on la crée dans une liste
         Books book = new Books(title, publishedYear, editorName, reference);
         // s'il ne contient pas le livre à la réference
-        if (!borrowedMap.containsKey(book.getReference())){
-            bookMap.put(book.getReference(), book);
-        }
+       // try {
+            if (!borrowedMap.containsKey(book.getReference())) {
+                bookMap.put(book.getReference(), book);
+            }
+       // }catch(IOException e2)
+        //    {
+        //        System.out.println("ceci est l'exception"+e2.getMessage());
+        //    }
         //TODO gerer lexecption
         // lexception ne fonctionne pas
-        //else {
-        //    throw new LibraryException("ce livre existe déjà");
-        //}
+
         return bookMap;
     }
 }

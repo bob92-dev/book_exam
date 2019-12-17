@@ -14,7 +14,7 @@ public class Order {
     public static void init() throws IOException {
         //give name at our databases. The file creater need it.
         String usersDatabase = "usersDatabase";
-        String borrowersDatabase= "borrowersDatabase";
+        String borrowersDatabase = "borrowersDatabase";
         String booksDatabase = "booksDatabase";
 
         System.out.println(
@@ -53,36 +53,33 @@ public class Order {
         System.out.println("Enter 15 to restore");
         //TODO : trouver une meilleure formule pour la commande 12
         // TODO : trouver ue meilleure formulation pour la commande 13 et s'assurer qu'elle est en lien avec le code
-
     }
 
 
     // this function make the bridge between the typing and the process
     public static void processCmd(int cmdNumber, Map usersMap, Map borrowedMap) throws LibraryException {
 
-        // TODO : faire le try catch comme demandé dans le backlog des commandes
-        try     {
-            switch (cmdNumber) {
-                case 1:
-                    System.out.println("help case");
-                    //TODO  lister toutes les commandes de l'application
-                    Order.help();
-                    break;
 
-                case 2:
-                    System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
-                    break;
+            try {
+                switch (cmdNumber) {
+                    case 1:
+                        System.out.println("help case");
+                        Order.help();
+                        break;
 
-                case 3:
-                   
-                    // DataBase situationBook = ;
-                    //situationBook.addUser(usersMap);
+                    case 2:
+                        System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
+                        break;
 
+                    case 3:
+
+                        // DataBase situationBook = ;
+                        //situationBook.addUser(usersMap);
+
+                }
+
+            } catch (Exception e) {
+                throw new LibraryException("Typing error. Please enter a valid number : between 1 and 15. See the helping configuration below ", e.getCause());
             }
-
-
-        } catch (Exception e) {
-            throw new LibraryException("Typing error. Please enter a valid number : between 1 and 15. See the helping configuration below ", e.getCause());
-        }
     }
 }

@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws LibraryException, IOException {
+    public static void main(String[] args) throws Exception {
 	// initialize the order = > create 3 databases
         Order.init();
 
         // catch the order
-    int cmdNum = Tools.getChoice();
+
 
 
 
@@ -21,17 +21,28 @@ public class Main {
         Map borrowedMap = new HashMap();
         Map booksMap = new HashMap();
 
-        usersMap.put("babar", new Users("babar","antoine", 11,03,1983));
+        // test introduction datas :
+
+        //usersMap.put("babar", new Users("babar","antoine", 11,03,1983));
 
 
 
-         // run the process
+         // run the process ina boucle wheenver the exist function is not asked
         //TODO : gestion de l'exception à revoir. Ca plante.
-        // TODO : voir s'il faiut rajouter la booksMap au CMD.
+        // TODO : voir s'il faut rajouter la booksMap au CMD.
+        //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
 
-        try {
+        int cmdNum;
+        do {
+
+            cmdNum = Tools.getChoice();
+                try {
         Order.processCmd(cmdNum, usersMap, borrowedMap);
-         } catch (LibraryException e) {System.out.println("this is an error()");}
+            } catch (Exception e) {
+                System.out.println("this is a ramasse miette error, which means a non treated error."+e.getMessage());
+            }
+            }while (cmdNum!=2);
+
         // test pour savoir si les données sont bien enregistrées
         //System.out.println(usersMap.toString());
 
