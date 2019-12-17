@@ -73,8 +73,9 @@ public class Order {
 
                     case 3:
                          Users.addIt(usersMap);
-                        // DataBase situationBook = ;
-                        //situationBook.addUser(usersMap);
+
+                    case 4 :
+
 
                 }
 

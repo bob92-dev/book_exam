@@ -57,7 +57,7 @@ public class FilesHandler {
     public void writeInFile(Map myDataMap, String databaseName){
 
         try {
-            FileWriter myWriter = new FileWriter(databaseName+".csv");
+            FileWriter myWriter = new FileWriter(databaseName+".csv", true);
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(myDataMap));
             myWriter.close();

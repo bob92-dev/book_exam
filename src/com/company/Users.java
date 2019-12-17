@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Users {
     private int birthMonth;
     private int birthYear;
 
+// -------------------------------------------- CONSTRUCTOR------------------------------------------------------------//
 
     /**
      * constructor method. Initialization.
@@ -39,7 +41,7 @@ public class Users {
         this.birthYear = birthYear;
     }
 
-    //}
+    //-----------------------------------------------   OVERIDING ---------------------------------------------------------------------------------------------------------------//
     //overidal of the to string sclass
     @Override
     public String toString() {
@@ -51,7 +53,6 @@ public class Users {
                 ", birthYear=" + birthYear +
                 '}';
     }
-
 
     // equals a verifier
     //TODO a verifier le rewriting de la classe equals
@@ -72,6 +73,8 @@ public class Users {
         return Objects.hash(getFirstName(), getName(), getBirthDay(), getBirthMonth(), getBirthYear());
     }
 
+
+    //--------------------------------------------- GETTERS AND SETTERS ---------------------------------------------------------------------------------------------//
     // getters ands setters
     public String getFirstName() {
         return firstName;
@@ -113,40 +116,93 @@ public class Users {
         this.birthYear = birthYear;
     }
 
+
+    //--------------------------------------------- CREATION OF USERS - INPUT - OUTPUT - IN DATABASE ---------------------------------------------------------------------------------------------//
+
+
     public static Map addIt(Map usersMap) {
         // j'imprime els instructions
+        String name;
+        String firstName;
+        Integer dayBirth = null;
+        Integer monthBirth = null;
+        Integer yearBirth = null;
+
+
+        // do while to deal with exceptions
+        //do {
         System.out.println("\n" +
                 "You want to susbcribe" +
                 "=> Please enter your name: \n");
         // je scanne ce qui est tapé
+        //TODO debug InpumismacatchEXCeption dans le day of your birth
         Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
+        name = sc.nextLine();
         System.out.println(name);
 
         System.out.println("Please enter your firstNname: \n");
         Scanner sc1 = new Scanner(System.in);
-        String firstName = sc1.nextLine();
+        firstName = sc1.nextLine();
         System.out.println(firstName);
 
-        System.out.println("Please enter the day of your birth: \n");
-        Scanner sc2 = new Scanner(System.in);
-        int dayBirth = sc2.nextInt();
-        System.out.println(dayBirth);
+        do {
 
-        System.out.println("Please enter the month of your birth: \n");
-        Scanner sc3 = new Scanner(System.in);
-        int monthBirth = sc3.nextInt();
-        System.out.println(monthBirth);
+            try {
+                System.out.println("Please enter the day of your birth: \n");
+                Scanner sc2 = new Scanner(System.in);
+                dayBirth = sc2.nextInt();
+                System.out.println(dayBirth);
+                if (dayBirth > 31) {
+                    System.out.println("erreur dans le jour");
+                }
+            }
+        catch (NoSuchElementException eNse) {
+                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
+            }
 
-        System.out.println("Please enter the year of your birth: \n");
-        Scanner sc4 = new Scanner(System.in);
-        int yearBirth = sc4.nextInt();
-        System.out.println(yearBirth);
+        }while (dayBirth == null||dayBirth > 31);
 
+
+
+        do {
+            try {
+                System.out.println("Please enter the month of your birth: \n");
+                Scanner sc3 = new Scanner(System.in);
+                monthBirth = sc3.nextInt();
+                System.out.println(monthBirth);
+                if (monthBirth > 12) {
+                    System.out.println("erreur dans le mois");
+                }
+            }
+            catch (NoSuchElementException eNse) {
+                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+            }
+
+        }while (monthBirth==null||monthBirth > 12);
+
+
+
+        do {
+            try {
+                System.out.println("Please enter the year of your birth: \n");
+                Scanner sc4 = new Scanner(System.in);
+                yearBirth = sc4.nextInt();
+                if (yearBirth < 1919 || yearBirth > 2019) {
+                    System.out.println("erreur dans l'année");
+                }
+                System.out.println(yearBirth);
+
+            } catch (NoSuchElementException eNse) {
+                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+            }
+        }while(yearBirth==null||yearBirth < 1919 || yearBirth > 2019);
+
+        //}while ( dayBirth == null || monthBirth==null || yearBirth==null);
+
+        Users user = new Users(firstName,name, dayBirth, monthBirth, yearBirth);
 
 
         // creation nouvel utilisateur
-        Users user = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
         System.out.println(user.name);
 
@@ -154,24 +210,17 @@ public class Users {
         if (usersMap.containsKey(user.getName()) && usersMap.containsValue(user.getFirstName())) {
             System.out.println("You are already registered in the database");
         } else {
-
-            //verification des entiers
-            // deja fait dna sle constructeur :
-            if (dayBirth > 31){
-                System.out.println("erreur dans le jour");
-            }
-            if (monthBirth > 12){
-                System.out.println("erreur dans le mois");
-            }
-            if (yearBirth < 1919 || yearBirth > 2019){
-                System.out.println("erreur dans l'année");
-
-            }
-            if ((dayBirth < 32 )&& (monthBirth < 13) && (yearBirth > 1919 && yearBirth < 2019)) {
                 // inscription dans le dictionnaire
                 usersMap.put(name, user);
-            }
+                // on sauvegarde les données
+                FilesHandler dataBaseUser = new FilesHandler();
+                String usersDatabase = "usersDatabase";
+                dataBaseUser.writeInFile(usersMap, usersDatabase);
         }
         return usersMap;
     }
+
+
+//---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//
+
 }
