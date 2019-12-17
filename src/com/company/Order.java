@@ -60,7 +60,7 @@ public class Order {
     public static void processCmd(int cmdNumber, Map usersMap, Map borrowedMap) throws LibraryException {
 
 
-            try {
+            //try {
                 switch (cmdNumber) {
                     case 1:
                         System.out.println("help case");
@@ -72,14 +72,14 @@ public class Order {
                         break;
 
                     case 3:
-
+                         Users.addIt(usersMap);
                         // DataBase situationBook = ;
                         //situationBook.addUser(usersMap);
 
                 }
 
-            } catch (Exception e) {
-                throw new LibraryException("Typing error. Please enter a valid number : between 1 and 15. See the helping configuration below ", e.getCause());
-            }
+           // } catch (Exception e) {
+           //     throw new LibraryException("Typing error. Please enter a valid number : between 1 and 15. See the helping configuration below ", e.getCause());
+           // }
     }
 }

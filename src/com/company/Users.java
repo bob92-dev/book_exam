@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Users implements IAddIt {
+public class Users {
 
     private String firstName;
     private String name;
@@ -15,6 +15,7 @@ public class Users implements IAddIt {
 
     /**
      * constructor method. Initialization.
+     *
      * @param firstName
      * @param name
      * @param birthDay
@@ -22,6 +23,15 @@ public class Users implements IAddIt {
      * @param birthYear
      */
     public Users(String firstName, String name, int birthDay, int birthMonth, int birthYear) {
+        /*if (birthDay < 32) {
+            throw new LibraryException("Please enter a number between 1 and 31 (included)");
+        }
+        if (birthMonth < 13) {
+            throw new LibraryException("Please enter a number between 1 and 31 (included)");
+        }
+        if (birthYear < 1919 || birthYear > 2019) {
+            throw new LibraryException("Impossible year of birth. Please enter a valid one.");
+        } else {*/
         this.firstName = firstName;
         this.name = name;
         this.birthDay = birthDay;
@@ -29,6 +39,7 @@ public class Users implements IAddIt {
         this.birthYear = birthYear;
     }
 
+    //}
     //overidal of the to string sclass
     @Override
     public String toString() {
@@ -102,8 +113,7 @@ public class Users implements IAddIt {
         this.birthYear = birthYear;
     }
 
-    @Override
-    public Map addIt(Map usersMap, Map borrowedMap) {
+    public static Map addIt(Map usersMap) {
         // j'imprime els instructions
         System.out.println("\n" +
                 "You want to susbcribe" +
@@ -111,37 +121,55 @@ public class Users implements IAddIt {
         // je scanne ce qui est tapé
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
+        System.out.println(name);
 
         System.out.println("Please enter your firstNname: \n");
         Scanner sc1 = new Scanner(System.in);
         String firstName = sc1.nextLine();
+        System.out.println(firstName);
 
         System.out.println("Please enter the day of your birth: \n");
         Scanner sc2 = new Scanner(System.in);
         int dayBirth = sc2.nextInt();
+        System.out.println(dayBirth);
 
         System.out.println("Please enter the month of your birth: \n");
         Scanner sc3 = new Scanner(System.in);
         int monthBirth = sc3.nextInt();
+        System.out.println(monthBirth);
 
         System.out.println("Please enter the year of your birth: \n");
         Scanner sc4 = new Scanner(System.in);
         int yearBirth = sc4.nextInt();
+        System.out.println(yearBirth);
+
 
 
         // creation nouvel utilisateur
         Users user = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
+
+        System.out.println(user.name);
+
         // verification des homonymies par le nom et homonymie par le prénom
         if (usersMap.containsKey(user.getName()) && usersMap.containsValue(user.getFirstName())) {
             System.out.println("You are already registered in the database");
         } else {
 
-            // verification des entiers
-            if ((dayBirth < 32) && (monthBirth < 13) && (yearBirth > 1919 && yearBirth < 2019)) {
+            //verification des entiers
+            // deja fait dna sle constructeur :
+            if (dayBirth > 31){
+                System.out.println("erreur dans le jour");
+            }
+            if (monthBirth > 12){
+                System.out.println("erreur dans le mois");
+            }
+            if (yearBirth < 1919 || yearBirth > 2019){
+                System.out.println("erreur dans l'année");
+
+            }
+            if ((dayBirth < 32 )&& (monthBirth < 13) && (yearBirth > 1919 && yearBirth < 2019)) {
                 // inscription dans le dictionnaire
                 usersMap.put(name, user);
-            } else {
-                System.out.println("erreur dans l'enregistrement");
             }
         }
         return usersMap;

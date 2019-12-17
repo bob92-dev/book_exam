@@ -15,14 +15,13 @@ public class Tools {
 //TODO : gestion de l'exception à vérifier
     public static int getChoice() throws Exception {
 
-        int choice = 1;
         System.out.println("\n" +
                 "=> Please enter a valid command number : \n");
 
         Scanner sc = new Scanner(System.in);
-
+        int choice = 0;
         try {
-            choice = sc.nextInt();
+            choice =  Integer.parseInt(sc.nextLine());
         }
             // erreur pour ceux qui laissent le champs vide
         catch (NumberFormatException enbr){
@@ -39,10 +38,16 @@ public class Tools {
         catch (Exception ex){
             System.out.println("OOPS : syntax error. Please enter a valid number"+ex.getCause()+ex.getMessage()+ex.getStackTrace());
         }
-
         return choice;
+    
     }
 
+
+    /* pour factoriser :
+     public static String getLine(String myString){
+
+        return null;
+    }*/
 
 
 }

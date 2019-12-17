@@ -38,8 +38,8 @@ public class Main {
             cmdNum = Tools.getChoice();
                 try {
         Order.processCmd(cmdNum, usersMap, borrowedMap);
-            } catch (Exception e) {
-                System.out.println("this is a ramasse miette error, which means a non treated error."+e.getMessage());
+            } catch (LibraryException message) {
+                System.out.println(message);
             }
             }while (cmdNum!=2);
 
