@@ -130,12 +130,11 @@ public class Users {
 
 
         // do while to deal with exceptions
-        //do {
+
         System.out.println("\n" +
                 "You want to susbcribe" +
                 "=> Please enter your name: \n");
         // je scanne ce qui est tapé
-        //TODO debug InpumismacatchEXCeption dans le day of your birth
         Scanner sc = new Scanner(System.in);
         name = sc.nextLine();
         System.out.println(name);
@@ -155,13 +154,11 @@ public class Users {
                 if (dayBirth > 31) {
                     System.out.println("erreur dans le jour");
                 }
-            }
-        catch (NoSuchElementException eNse) {
+            } catch (NoSuchElementException eNse) {
                 System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
             }
 
-        }while (dayBirth == null||dayBirth > 31);
-
+        } while (dayBirth == null || dayBirth > 31);
 
 
         do {
@@ -173,13 +170,11 @@ public class Users {
                 if (monthBirth > 12) {
                     System.out.println("erreur dans le mois");
                 }
-            }
-            catch (NoSuchElementException eNse) {
+            } catch (NoSuchElementException eNse) {
                 System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
             }
 
-        }while (monthBirth==null||monthBirth > 12);
-
+        } while (monthBirth == null || monthBirth > 12);
 
 
         do {
@@ -195,14 +190,11 @@ public class Users {
             } catch (NoSuchElementException eNse) {
                 System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
             }
-        }while(yearBirth==null||yearBirth < 1919 || yearBirth > 2019);
-
-        //}while ( dayBirth == null || monthBirth==null || yearBirth==null);
-
-        Users user = new Users(firstName,name, dayBirth, monthBirth, yearBirth);
+        } while (yearBirth == null || yearBirth < 1919 || yearBirth > 2019);
 
 
         // creation nouvel utilisateur
+        Users user = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
         System.out.println(user.name);
 
@@ -210,17 +202,24 @@ public class Users {
         if (usersMap.containsKey(user.getName()) && usersMap.containsValue(user.getFirstName())) {
             System.out.println("You are already registered in the database");
         } else {
-                // inscription dans le dictionnaire
-                usersMap.put(name, user);
-                // on sauvegarde les données
-                FilesHandler dataBaseUser = new FilesHandler();
-                String usersDatabase = "usersDatabase";
-                dataBaseUser.writeInFile(usersMap, usersDatabase);
+            // inscription dans le dictionnaire
+            usersMap.put(name, user);
+            // on sauvegarde les données
+            FilesHandler dataBaseUser = new FilesHandler();
+            String usersDatabase = "usersDatabase";
+            dataBaseUser.writeInFile(usersMap, usersDatabase);
         }
         return usersMap;
     }
 
+    //public static User editUsers(){
+    //    return null;
+    //}
+
+}
+
+
+
 
 //---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//
 
-}

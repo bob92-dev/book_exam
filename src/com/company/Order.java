@@ -73,8 +73,10 @@ public class Order {
 
                     case 3:
                          Users.addIt(usersMap);
+                         break;
 
                     case 4 :
+
 
 
                 }

@@ -15,7 +15,7 @@ public class FilesHandler {
      */
     public void createFile (String databaseName) throws IOException {
 
-        File database = new File(databaseName+".csv");
+        File database = new File(databaseName+".txt");
         // check if the file exist
         if(!database.exists()){
 
@@ -35,7 +35,7 @@ public class FilesHandler {
     public void readFile(String databaseName) {
 
         try {
-            File f = new File(databaseName+".csv");
+            File f = new File(databaseName+".txt");
             Scanner myReader = new Scanner(f);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -57,7 +57,7 @@ public class FilesHandler {
     public void writeInFile(Map myDataMap, String databaseName){
 
         try {
-            FileWriter myWriter = new FileWriter(databaseName+".csv", true);
+            FileWriter myWriter = new FileWriter(databaseName+".txt", true);
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(myDataMap));
             myWriter.close();

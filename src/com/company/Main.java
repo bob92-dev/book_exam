@@ -12,9 +12,7 @@ public class Main {
         Order.init();
 
         // catch the order
-
-
-
+        
 
     // introduction of datas of our databases in our programm
         Map usersMap = new HashMap();
