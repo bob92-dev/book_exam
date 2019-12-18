@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -96,7 +97,7 @@ public class Borrows implements IAddIt{
     }
 
     @Override
-    public Map addIt(Map usersMap, Map borrowedMap) {
+    public Map addIt(List usersList, Map borrowedMap) {
         return null;
     }
 }

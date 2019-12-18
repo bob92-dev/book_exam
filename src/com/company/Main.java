@@ -2,7 +2,9 @@ package com.company;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -15,19 +17,24 @@ public class Main {
         
 
     // introduction of datas of our databases in our programm
-        Map usersMap = new HashMap();
-        Map borrowedMap = new HashMap();
-        Map booksMap = new HashMap();
 
+        //String firstName;
+        //String name;
+        //Users user = new Users(firstName, name, int day, int month, int year);
+
+
+        List<Users> usersList = new ArrayList<Users>();
+        List<Books> booksList = new ArrayList<Books>();
+        Map borrowedMap = new HashMap();
         // test introduction datas :
 
-        //usersMap.put("babar", new Users("babar","antoine", 11,03,1983));
+        //userslist.put("babar", new Users("babar","antoine", 11,03,1983));
 
 
 
          // run the process ina boucle wheenver the exist function is not asked
         //TODO : gestion de l'exception à revoir. Ca plante.
-        // TODO : voir s'il faut rajouter la booksMap au CMD.
+        // TODO : voir s'il faut rajouter la booksList au CMD.
         //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
 
         int cmdNum;
@@ -35,14 +42,14 @@ public class Main {
 
             cmdNum = Tools.getChoice();
                 try {
-        Order.processCmd(cmdNum, usersMap, borrowedMap);
+        Order.processCmd(cmdNum, usersList, borrowedMap);
             } catch (LibraryException message) {
                 System.out.println(message);
             }
             }while (cmdNum!=2);
 
         // test pour savoir si les données sont bien enregistrées
-        //System.out.println(usersMap.toString());
+        //System.out.println(userslist.toString());
 
 
 
@@ -52,15 +59,15 @@ public class Main {
         String borrowersDatabase= "borrowersDatabase";
         String booksDatabase ="booksDatabase";
 
-        database.writeInFile(usersMap,usersDatabase);
+        database.writeInFile(usersList,usersDatabase);
         database.readFile(usersDatabase);
 
-        database.writeInFile(borrowedMap,borrowersDatabase);
-        database.readFile(usersDatabase);
 
-        database.writeInFile(booksMap,booksDatabase);
+        database.writeInFile(booksList,booksDatabase);
         database.readFile(booksDatabase);
 
+        database.writeInFileMap(borrowedMap,borrowersDatabase);
+        database.readFile(usersDatabase);
     }
 
 }

@@ -21,7 +21,7 @@ public class Tools {
         Scanner sc = new Scanner(System.in);
         int choice = 0;
         try {
-            choice =  Integer.parseInt(sc.nextLine());
+            choice = Integer.parseInt(sc.nextLine());
         }
             // erreur pour ceux qui laissent le champs vide
         catch (NumberFormatException enbr){

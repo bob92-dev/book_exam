@@ -4,6 +4,7 @@ package com.company;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Map;
 
 public class Order {
@@ -57,7 +58,7 @@ public class Order {
 
 
     // this function make the bridge between the typing and the process
-    public static void processCmd(int cmdNumber, Map usersMap, Map borrowedMap) throws LibraryException {
+    public static void processCmd(int cmdNumber, List usersList, Map borrowedMap) throws LibraryException {
 
 
             //try {
@@ -72,10 +73,11 @@ public class Order {
                         break;
 
                     case 3:
-                         Users.addIt(usersMap);
+                         Users.addIt(usersList);
                          break;
 
                     case 4 :
+                        Users.updateList(usersList);
 
 
 

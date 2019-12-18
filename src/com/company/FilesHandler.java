@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,13 +12,14 @@ public class FilesHandler {
 
     /**
      * this method create the database, as a csv file (if it doesn't exist). It is called in the init function.
+     *
      * @throws IOException
      */
-    public void createFile (String databaseName) throws IOException {
+    public void createFile(String databaseName) throws IOException {
 
-        File database = new File(databaseName+".txt");
+        File database = new File(databaseName + ".txt");
         // check if the file exist
-        if(!database.exists()){
+        if (!database.exists()) {
 
             //if not, create a file for the database
             try {
@@ -35,36 +37,56 @@ public class FilesHandler {
     public void readFile(String databaseName) {
 
         try {
-            File f = new File(databaseName+".txt");
+            File f = new File(databaseName + ".txt");
             Scanner myReader = new Scanner(f);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(data); }
+                System.out.println(data);
+            }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace(); }
+            e.printStackTrace();
+        }
 
     }
 
 
-    //TODO vérifier ce bout de code, notamment ligne myWriter.write(String.valueOf(myDataMap));
+    //TODO vérifier ce bout de code, notamment ligne myWriter.write(String.valueOf(myDataList));
 
     /**
      * this method is build for writing and saving our data in our database.csv
-     * @param myDataMap
+     *
+     * @param myDataList
      */
-    public void writeInFile(Map myDataMap, String databaseName){
+    public void writeInFile(List myDataList, String databaseName) {
 
         try {
-            FileWriter myWriter = new FileWriter(databaseName+".txt", true);
+            FileWriter myWriter = new FileWriter(databaseName + ".txt", true);
             // pas sur de ce bout de code là.
-            myWriter.write(String.valueOf(myDataMap));
+            myWriter.write(String.valueOf(myDataList));
             myWriter.close();
             System.out.println("Successfully wrote into the file.");
         } catch (IOException e) {
-            System.out.println("An error occurred"); e.printStackTrace();
+            System.out.println("An error occurred");
+            e.printStackTrace();
         }
     }
 
+
+    public void writeInFileMap(Map borrowedMap, String borrowersDatabase) {
+
+
+        try {
+            FileWriter myWriter = new FileWriter(borrowersDatabase + ".txt", true);
+            // pas sur de ce bout de code là.
+            myWriter.write(String.valueOf(borrowedMap));
+            myWriter.close();
+            System.out.println("Successfully wrote into the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+
     }
+}

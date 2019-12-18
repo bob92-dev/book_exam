@@ -1,11 +1,11 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Books implements IAddIt {
+public class Books {
     private String title;
     private int publishedYear;
     private String editorName;
@@ -92,15 +92,15 @@ public class Books implements IAddIt {
 
     // that's our addbook
     // TODO fonction à revoir
-    @Override
-   public Map addIt(Map bookMap, Map borrowedMap) throws IOException {
+
+   public List<Books> addIt(List<Books> bookList, Map borrowedMap) throws IOException {
         // d'abord chercher si la référence est prèsente dans borrow
         // si la référence de l'objet n'existe pas, on la crée dans une liste
         Books book = new Books(title, publishedYear, editorName, reference);
         // s'il ne contient pas le livre à la réference
        // try {
             if (!borrowedMap.containsKey(book.getReference())) {
-                bookMap.put(book.getReference(), book);
+                bookList.add(book);
             }
        // }catch(IOException e2)
         //    {
@@ -109,6 +109,6 @@ public class Books implements IAddIt {
         //TODO gerer lexecption
         // lexception ne fonctionne pas
 
-        return bookMap;
+        return bookList;
     }
 }
