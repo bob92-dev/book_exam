@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Users {
@@ -116,244 +117,199 @@ public class Users {
     }
 
 
-    //--------------------------------------------- CREATION OF USERS - INPUT - OUTPUT - IN DATABASE ---------------------------------------------------------------------------------------------//
+    //--------------------------------------------- CREATION OF USERS - INPUT - IN DATABASE ---------------------------------------------------------------------------------------------//
 
 
-    public static List<Users> addIt(List<Users> usersList) {
-        // j'imprime els instructions
-        String name = "";
-        String firstName = "";
+    public static List<Users> addIt(List<Users> usersList, List<Books> booksList, Map borrowedMap  ) {
+
+        String name ="";
+        String firstName ="";
         Integer dayBirth = 0;
         Integer monthBirth = 0;
         Integer yearBirth = 0;
+        boolean isUserTheSame =false;
 
         Users user = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
-        // do while to deal with exceptions
+        //do {
+            System.out.println("You want to susbcribe" +
+                    "=> Please enter your name:");
+            name = Tools.scanString(name);
+            user.setName(name);
 
-        System.out.println("\n" +
-                "You want to susbcribe" +
-                "=> Please enter your name: \n");
-        //test
-        System.out.println(usersList);
-        // je scanne ce qui est tapé
-        Scanner sc = new Scanner(System.in);
-        name = sc.nextLine();
-        System.out.println(name);
-        user.setName(name);
+            System.out.println("Please enter your firstName: \n");
+            firstName = Tools.scanString(firstName);
+            user.setFirstName(firstName);
 
-        System.out.println("Please enter your firstNname: \n");
-        Scanner sc1 = new Scanner(System.in);
-        firstName = sc1.nextLine();
-        System.out.println(firstName);
-        user.setFirstName(firstName);
-
-        for (Users user1:usersList) {
-            if (user1.getFirstName().equals(firstName) && user1.getName().equals(name)) {
-                System.out.println("You are already registered!");
-                return null;
+            isUserTheSame = Tools.isSameUser(usersList, firstName, name, isUserTheSame);
+            if (isUserTheSame == true) {
+                System.out.println("This user already exist. Please retry with another name.");
+                Order.runApp(1, usersList,booksList, borrowedMap);
             }
+        //} while (isUserTheSame == true) ;
 
-        }
 
+            do {
 
-        do {
+                try {
+                    System.out.println("Please enter the day of your birth (between 1 and 31 included): \n");
+                    dayBirth = Tools.scanInt(dayBirth);
 
-            try {
-                System.out.println("Please enter the day of your birth: \n");
-                Scanner sc2 = new Scanner(System.in);
-                dayBirth = sc2.nextInt();
-                System.out.println(dayBirth);
-                if (dayBirth > 31) {
-                    System.out.println("erreur dans le jour");
+                    if (dayBirth <= 0 || dayBirth > 31) {
+                        System.out.println("Don't forget, a month cannot have more than 31 days !");
+                    }
+                    user.setBirthDay(dayBirth);
+
+                } catch (NoSuchElementException eNse) {
+                    System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
                 }
-                user.setBirthDay(dayBirth);
 
-            } catch (NoSuchElementException eNse) {
-                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
-            }
-
-        } while (dayBirth == 0 || dayBirth > 31);
+            } while (dayBirth <= 0 || dayBirth > 31);
 
 
-        do {
-            try {
-                System.out.println("Please enter the month of your birth: \n");
-                Scanner sc3 = new Scanner(System.in);
-                monthBirth = sc3.nextInt();
-                System.out.println(monthBirth);
-                if (monthBirth > 12) {
-                    System.out.println("erreur dans le mois");
+            do {
+                try {
+                    System.out.println("Please enter the month of your birth: \n");
+                    monthBirth = Tools.scanInt(monthBirth);
 
+                    if (monthBirth <= 0 || monthBirth > 12) {
+                        System.out.println("Don't forget, a year can't have more than 12 months.");
+                    }
+                    user.setBirthMonth(monthBirth);
+                } catch (NoSuchElementException eNse) {
+                    System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
                 }
-                user.setBirthMonth(monthBirth);
-            } catch (NoSuchElementException eNse) {
-                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
-            }
 
-        } while (monthBirth == 0 || monthBirth > 12);
+            } while (monthBirth <= 0 || monthBirth > 12);
 
+            do {
+                try {
+                    System.out.println("Please enter the year of your birth: \n");
+                    yearBirth = Tools.scanInt(yearBirth);
 
-        do {
-            try {
-                System.out.println("Please enter the year of your birth: \n");
-                Scanner sc4 = new Scanner(System.in);
-                yearBirth = sc4.nextInt();
-                if (yearBirth < 1919 || yearBirth > 2019) {
-                    System.out.println("erreur dans l'année");
+                    if (yearBirth <= 0 || yearBirth < 1900 || yearBirth > 2019) {
+                        System.out.println("erreur dans l'année");
+                    }
+                    user.setBirthYear(yearBirth);
+
+                } catch (NoSuchElementException eNse) {
+                    System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
                 }
-                user.setBirthYear(yearBirth);
-                System.out.println(yearBirth);
-
-            } catch (NoSuchElementException eNse) {
-                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
-            }
-        } while (yearBirth == 0 || yearBirth < 1919 || yearBirth > 2019);
+            } while (yearBirth <= 0 || yearBirth < 1900 || yearBirth > 2019);
 
 
-        // creation nouvel utilisateur
-
-        System.out.println(user.name);
-
-        // verification des homonymies par le nom et homonymie par le prénom
-
-        // ajout utilisateur
-        usersList.add(user);
-        //test
-        System.out.println(usersList);
-
+            // ajout utilisateur à la liste
+            usersList.add(user);
+            //sauvagarde de la liste dans la database avec le nouvel utilisateur
+            FilesHandler f = new FilesHandler();
+            f.writeInFile(usersList, "usersDatabase");
+            //test
             return usersList;
         }
 
 
-    public static List <Users> updateList(List <Users> usersList){
+//---------------------------------------------  UPDATING IN DATABASE ---------------------------------------------------------------------------------------------//
+
+ public static List <Users> updateList(List <Users> usersList, List <Books> booksList, Map borrowedMap) throws IOException {
+     String name = "";
+     String firstName = "";
+     Integer dayBirth = 0;
+     Integer monthBirth = 0;
+     Integer yearBirth = 0;
+     boolean isUserInuserslist=false;
+
+     Users userUpdated = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
         //rcehercher un utilisateur avec exactement le patronyme utilisé
-        boolean inside = false;
+
+
         // verification du même patronyme
+     do {
+         System.out.println("You want to update a user" +
+                 "=> Please enter your name:");
+         name = Tools.scanString(name);
+         userUpdated.setName(name);
 
-        String name = "";
-        String firstName = "";
-        Integer dayBirth = 0;
-        Integer monthBirth = 0;
-        Integer yearBirth = 0;
+         System.out.println("Please enter your firstName: \n");
+         firstName = Tools.scanString(firstName);
+         userUpdated.setFirstName(firstName);
 
-        Users user = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
+         isUserInuserslist = Tools.isSameUser(usersList, firstName, name, isUserInuserslist);
+         //TODO a completer = > isuserInMapuser
+         if (isUserInuserslist == true) {
+             System.out.println("User founded. Let's update");
+             Users usertoremove = Tools.getSimilarReference(usersList,firstName, name);
+             usersList.remove(usertoremove);
+         }
+         else {
+             System.out.println("User not present in our database. You can't update it. Please type 3 to create a new user");
+             //rerun the process
+             Order.processCmd(1, usersList,booksList,borrowedMap);
+         }
 
-        // do while to deal with exceptions
-
-        System.out.println(
-                "=> Please enter your name: \n");
-        //test
-        System.out.println(usersList);
-        // je scanne ce qui est tapé
-        Scanner sc = new Scanner(System.in);
-        name = sc.nextLine();
-        System.out.println(name);
-        user.setName(name);
-
-        System.out.println("Please enter your firstNname: \n");
-        Scanner sc1 = new Scanner(System.in);
-        firstName = sc1.nextLine();
-        System.out.println(firstName);
-        user.setFirstName(firstName);
-
-        for (Users user1:usersList) {
-            if (user1.getFirstName().equals(user.firstName) && user1.getName().equals(user.name)) {
-                inside = true;
-                System.out.println("You are registered. Lets updating your datas");
-
-                do {
-
-                    try {
-                        System.out.println("Please update the day of your birth: \n");
-                        Scanner sc2 = new Scanner(System.in);
-                        dayBirth = sc2.nextInt();
-                        System.out.println(dayBirth);
-                        if (dayBirth > 31) {
-                            System.out.println("erreur dans le jour");
-                        }
-                        user.setBirthDay(dayBirth);
-
-                    } catch (NoSuchElementException eNse) {
-                        System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
-                    }
-
-                } while (dayBirth == 0 || dayBirth > 31);
-
-                do {
-
-                    try {
-                        System.out.println("Please enter the month of your birth: \n");
-                        Scanner sc3 = new Scanner(System.in);
-                        monthBirth = sc3.nextInt();
-                        System.out.println(monthBirth);
-                        if (monthBirth > 12) {
-                            System.out.println("erreur dans le mois");
-
-                        }
-                        user.setBirthMonth(monthBirth);
-                    } catch (NoSuchElementException eNse) {
-                        System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
-                    }
-
-                } while (monthBirth == 0 || monthBirth > 12);
-
-                do {
-
-                    try {
-                        System.out.println("Please enter the year of your birth: \n");
-                        Scanner sc4 = new Scanner(System.in);
-                        yearBirth = sc4.nextInt();
-                        if (yearBirth < 1919 || yearBirth > 2019) {
-                            System.out.println("erreur dans l'année");
-                        }
-                        user.setBirthYear(yearBirth);
-                        System.out.println(yearBirth);
-
-                    } catch (NoSuchElementException eNse) {
-                        System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
-                    }
-                } while (yearBirth == 0 || yearBirth < 1919 || yearBirth > 2019);
+         } while (isUserInuserslist == false) ;
 
 
-                            // ajout utilisateur
-               else{
+        // UPDATING DATAS
+
+     do {
+
+         try {
+             System.out.println("Please update your birthday): \n");
+             dayBirth = Tools.scanInt(dayBirth);
+
+             if (dayBirth <= 0 || dayBirth > 31) {
+                 System.out.println("Don't forget, a month cannot have more than 31 days !");
+             }
+             userUpdated.setBirthDay(dayBirth);
+
+         } catch (NoSuchElementException eNse) {
+             System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
+         }
+
+     } while (dayBirth <= 0 || dayBirth > 31);
 
 
+     do {
+         try {
+             System.out.println("Please update the month of your birth: \n");
+             monthBirth = Tools.scanInt(monthBirth);
 
-               }
-            }             usersList.add(user);
-                            //test
-                            System.out.println(usersList);
+             if (monthBirth <= 0 || monthBirth > 12) {
+                 System.out.println("Don't forget, a year can't have more than 12 months.");
+             }
+             userUpdated.setBirthMonth(monthBirth);
+         } catch (NoSuchElementException eNse) {
+             System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+         }
 
-                            return usersList;
-            }
+     } while (monthBirth <= 0 || monthBirth > 12);
 
+     do {
+         try {
+             System.out.println("Please enter the year of your birth: \n");
+             yearBirth = Tools.scanInt(yearBirth);
 
+             if (yearBirth <= 0 || yearBirth < 1900 || yearBirth > 2019) {
+                 System.out.println("Wrong year. You are too old to be alive or you're not born");
+             }
+             userUpdated.setBirthYear(yearBirth);
 
-            }
+         } catch (NoSuchElementException eNse) {
+             System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+         }
+     } while (yearBirth <= 0 || yearBirth < 1900 || yearBirth > 2019);
+
+     usersList.add(userUpdated);
+     System.out.println(usersList);
+     FilesHandler f = new FilesHandler();
+     f.writeInFile(usersList, "usersDatabase");
+     return usersList;
+
+ }
+
+ //public static removeUser ()
 }
-
-// rcehercher un utilisateur avec excatement le patronme utilisé
-
-
-
-       /* #4] edituser <firstname> <lastname>
-                - la commande va modifier un utilisateur déjà enregistré
-                - la commande recherche un utilisateur avec exactement le patronyme rentré.
-                Si l'utilisateur existe, alors la commande demande d'entrer tous les nouveaux paramètres un à un.
-        Si pour un paramètre on entre une chaine vide, on garde la valeur précédente
-
-
-        - la commande va ensuite vérifier les nouvelles informations entrées (comme le fait adduser) et enregistrer les modifications de l'utilisateur DANS LE MEME OBJET (on modifie l'utilisateur, on n'en créé pas de nouveau).
-
-        SI une erreur est survenue dans la saisie des nouvelles valeurs (ex : le nouveau nom et le nouveau prénom existent deja, ou bien un champ de type entier qui contient des lettres) alors on ne modifie pas l'utilisateur et on affiche un message d'erreur.
-        */
-
-       - si l'utilisateur recherché n'existe pas dans la liste, alors on affiche un message d'erreur.
-               - si l'utilisateur est utilisé dans la troisième table (emprunts, locations, enchères, livraisons, actions, transactions), alors la modification de cet utilisateur ne pourra pas se faire et un message d'erreur sera affiché
-
 
 
 

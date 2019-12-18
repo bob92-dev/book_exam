@@ -26,9 +26,8 @@ public class Main {
         List<Users> usersList = new ArrayList<Users>();
         List<Books> booksList = new ArrayList<Books>();
         Map borrowedMap = new HashMap();
-        // test introduction datas :
+        int cmdNum =1;
 
-        //userslist.put("babar", new Users("babar","antoine", 11,03,1983));
 
 
 
@@ -37,7 +36,9 @@ public class Main {
         // TODO : voir s'il faut rajouter la booksList au CMD.
         //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
 
-        int cmdNum;
+        Order.runApp(cmdNum,usersList,booksList,borrowedMap) ;
+        /*
+
         do {
 
             cmdNum = Tools.getChoice();
@@ -47,7 +48,7 @@ public class Main {
                 System.out.println(message);
             }
             }while (cmdNum!=2);
-
+*/
         // test pour savoir si les données sont bien enregistrées
         //System.out.println(userslist.toString());
 
@@ -61,7 +62,6 @@ public class Main {
 
         database.writeInFile(usersList,usersDatabase);
         database.readFile(usersDatabase);
-
 
         database.writeInFile(booksList,booksDatabase);
         database.readFile(booksDatabase);

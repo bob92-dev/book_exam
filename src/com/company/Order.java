@@ -4,6 +4,8 @@ package com.company;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,8 +59,26 @@ public class Order {
     }
 
 
+    public static void runApp(int cmdNum, List<Users> usersList, List<Books> booksList, Map borrowedMap ){
+
+        do {
+
+            try {
+                cmdNum = Tools.getChoice();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                Order.processCmd(cmdNum, usersList, booksList,borrowedMap);
+            } catch (Exception message) {
+                System.out.println(message);
+            }
+        }while (cmdNum!=2);
+    }
+
+
     // this function make the bridge between the typing and the process
-    public static void processCmd(int cmdNumber, List usersList, Map borrowedMap) throws LibraryException {
+    public static void processCmd(int cmdNumber, List usersList, List<Books> booksList, Map borrowedMap) throws IOException {
 
 
             //try {
@@ -73,11 +93,10 @@ public class Order {
                         break;
 
                     case 3:
-                         Users.addIt(usersList);
+                         Users.addIt(usersList,booksList,borrowedMap);
                          break;
 
-                    case 4 :
-                        Users.updateList(usersList);
+                    case 4 : Users.updateList(usersList, booksList, borrowedMap);
 
 
 

@@ -53,20 +53,21 @@ public class FilesHandler {
 
 
     //TODO vérifier ce bout de code, notamment ligne myWriter.write(String.valueOf(myDataList));
+    //TODO a changer dans le main l'ordre d ecreation de slistes qui empeche de reverser leslistes existantes dans les listes crées
 
     /**
-     * this method is build for writing and saving our data in our database.csv
+     * this method is build for writing and saving our data in our database.txt
      *
      * @param myDataList
      */
     public void writeInFile(List myDataList, String databaseName) {
 
         try {
-            FileWriter myWriter = new FileWriter(databaseName + ".txt", true);
+            FileWriter myWriter = new FileWriter(databaseName + ".txt");
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(myDataList));
             myWriter.close();
-            System.out.println("Successfully wrote into the file.");
+            System.out.println("Successfully saved in the database.");
         } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();
@@ -78,11 +79,11 @@ public class FilesHandler {
 
 
         try {
-            FileWriter myWriter = new FileWriter(borrowersDatabase + ".txt", true);
+            FileWriter myWriter = new FileWriter(borrowersDatabase + ".txt");
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(borrowedMap));
             myWriter.close();
-            System.out.println("Successfully wrote into the file.");
+            System.out.println("Successfully saved in the database.");
         } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();
