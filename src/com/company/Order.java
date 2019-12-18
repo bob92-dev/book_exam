@@ -78,7 +78,7 @@ public class Order {
 
 
     // this function make the bridge between the typing and the process
-    public static void processCmd(int cmdNumber, List usersList, List<Books> booksList, Map borrowedMap) throws IOException {
+    public static void processCmd(int cmdNumber, List <Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
 
 
             //try {
@@ -96,7 +96,14 @@ public class Order {
                          Users.addIt(usersList,booksList,borrowedMap);
                          break;
 
-                    case 4 : Users.updateList(usersList, booksList, borrowedMap);
+                    case 4 :
+                        Users.updateList(usersList, booksList, borrowedMap);
+                        break;
+                    case 6 :
+                        Tools.showListElement((ArrayList) usersList);
+                        break;
+                    //case 6 :
+                      //  Tools.showListElement((ArrayList) booksList);
 
 
 

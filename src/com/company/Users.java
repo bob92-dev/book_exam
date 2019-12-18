@@ -308,7 +308,68 @@ public class Users {
 
  }
 
- //public static removeUser ()
+
+
+ /*
+ public static List <Users> removeUser (List<Users> usersList, String firstName, String name, boolean isUserTheSame){
+     String name = "";
+     String firstName = "";
+     Integer dayBirth = 0;
+     Integer monthBirth = 0;
+     Integer yearBirth = 0;
+
+     Users usertoFind = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
+
+     // verification du même patronyme
+     do {
+         System.out.println(
+                 "=> Please enter your name:");
+         name = Tools.scanString(name);
+         usertoFind.setName(name);
+
+         System.out.println("Please enter your firstName: \n");
+         firstName = Tools.scanString(firstName);
+         usertoFind.setFirstName(firstName);
+         boolean isUserInuserslist=false;
+         isUserInuserslist = Tools.isSameUser(usersList, firstName, name, isUserInuserslist);
+
+
+         //TODO a completer = > isuserInMapuser
+         if (isUserInuserslist == true) {
+             System.out.println("User founded. Let's update");
+             Users usertoremove = Tools.getSimilarReference(usersList,firstName, name);
+             usersList.remove(usertoremove);
+         }
+         else {
+             System.out.println("User not present in our database. You can't update it. Please type 3 to create a new user");
+             //rerun the process
+             Order.processCmd(1, usersList,booksList,borrowedMap);
+         }
+
+     } while (isUserInuserslist == false) ;
+
+
+
+
+
+
+
+
+
+        for (Users user1 : usersList) {
+             if (user1.getFirstName().equals(firstName) && user1.getName().equals(name)) {
+                 isUserTheSame = true;
+             } else {
+                 isUserTheSame = false;
+                 System.out.println("OK give us other informations");
+
+             }
+         }
+         return isUserTheSame;
+     }
+
+
+ }*/
 }
 
 

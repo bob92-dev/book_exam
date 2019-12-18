@@ -11,6 +11,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 	// initialize the order = > create 3 databases
+        List<Users> usersList = new ArrayList<Users>();
+        List<Books> booksList = new ArrayList<Books>();
+        Map borrowedMap = new HashMap();
+        int cmdNum =1;
+
         Order.init();
 
         // catch the order
@@ -23,10 +28,7 @@ public class Main {
         //Users user = new Users(firstName, name, int day, int month, int year);
 
 
-        List<Users> usersList = new ArrayList<Users>();
-        List<Books> booksList = new ArrayList<Books>();
-        Map borrowedMap = new HashMap();
-        int cmdNum =1;
+
 
 
 

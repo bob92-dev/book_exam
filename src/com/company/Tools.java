@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -77,5 +78,16 @@ public class Tools {
         }
         return null;
     }
+
+    public static void showListElement (ArrayList theList){
+        for(int i=0; i<theList.size(); i++)
+            System.out.println(theList.get(i));
+    }
+
+
+
+
+
+
 
 }
