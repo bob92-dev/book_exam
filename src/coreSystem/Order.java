@@ -1,11 +1,14 @@
-package com.company;
+package coreSystem;
 
 
-import java.io.File;
+import objects.Books;
+import tools.FilesHandler;
+import objects.Users;
+import tools.Tools;
+import tools.UsersTools;
+
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,7 +111,7 @@ public class Order {
 
         }
     }
-    
+
 
     public static void endApp (List <Users> usersList, List<Books> booksList, Map borrowedMap){
         //Inscription des données dans les databases

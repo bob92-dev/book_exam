@@ -1,4 +1,4 @@
-package com.company;
+package tools;
 
 /**
  * Exception class used to contain all the exceptions in our library app.

@@ -1,10 +1,12 @@
-package com.company;
+package tools;
+
+import com.company.IAddIt;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Borrows implements IAddIt{
+public class Borrows implements IAddIt {
     private String borrowerName;
     private String borrowerFirstName;
     private String bookReference;
