@@ -12,7 +12,7 @@ public class Books {
     private String reference;
 
     // reference en final ?
-
+// -------------------------------------------- CONSTRUCTOR------------------------------------------------------------//
     /**
      * constructor method. Initialization.
      * @param title
@@ -27,9 +27,8 @@ public class Books {
         this.reference = reference;
     }
 
+    //---------------------------------------------- GETTERS AND SETTERS ---------------------------------------------------------------------------------------------//
 
-
-    // getters and setters
     public void setTitle(String title) {
         this.title = title;
     }
@@ -64,6 +63,9 @@ public class Books {
         return reference;
     }
 
+    //-----------------------------------------------   OVERIDING ---------------------------------------------------------------------------------------------------------------//
+
+
     @Override
     public String toString() {
         return "Books{" +
@@ -93,22 +95,9 @@ public class Books {
     // that's our addbook
     // TODO fonction à revoir
 
-   public List<Books> addIt(List<Books> bookList, Map borrowedMap) throws IOException {
-        // d'abord chercher si la référence est prèsente dans borrow
-        // si la référence de l'objet n'existe pas, on la crée dans une liste
-        Books book = new Books(title, publishedYear, editorName, reference);
-        // s'il ne contient pas le livre à la réference
-       // try {
-            if (!borrowedMap.containsKey(book.getReference())) {
-                bookList.add(book);
-            }
-       // }catch(IOException e2)
-        //    {
-        //        System.out.println("ceci est l'exception"+e2.getMessage());
-        //    }
-        //TODO gerer lexecption
-        // lexception ne fonctionne pas
 
-        return bookList;
-    }
+
+
+
+
 }

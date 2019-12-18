@@ -96,7 +96,7 @@ public class Order {
                 break;
 
             case 3:
-                UsersTools.addIt(usersList, booksList, borrowedMap);
+                UsersTools.addUser(usersList, booksList, borrowedMap);
                 break;
 
             case 4:
@@ -107,7 +107,7 @@ public class Order {
             case 6:
                 Tools.showListElement((ArrayList) usersList);
                 break;
-            //case 6 :
+            //case 10 :
             //  Tools.showListElement((ArrayList) booksList);
 
 
@@ -132,3 +132,4 @@ public class Order {
         database.readFile(usersDatabase);
     }
 }
+//---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//

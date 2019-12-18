@@ -1,5 +1,6 @@
 package tools;
 
+import objects.Books;
 import objects.Users;
 
 import java.util.ArrayList;
@@ -69,6 +70,19 @@ public class Tools {
         return isUserTheSame;
     }
 
+    public static boolean isSameBook(List<Books> booksList,String reference, String title, int publishedYear,String editorName, boolean isBookTheSame) {
+        for (Books book : booksList) {
+            if (book.getReference().equals(reference)) {
+                isBookTheSame = true;
+            } else {
+                isBookTheSame = false;
+                System.out.println("OK give us other informations");
+
+            }
+        }
+        return isBookTheSame;
+    }
+
 
     public static Users getSimilarReference(List<Users> usersList, String firstName, String name) {
         for (Users user1 : usersList) {
@@ -84,10 +98,5 @@ public class Tools {
             System.out.println(theList.get(i));
     }
 
-
-
-
-
-
-
 }
+//---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//

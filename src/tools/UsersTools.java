@@ -14,7 +14,7 @@ public class UsersTools {
 //--------------------------------------------- CREATION OF USERS - INPUT - IN DATABASE - COMMAND 3---------------------------------------------------------------------------------------------//
 
 
-    public static java.util.List<Users> addIt(java.util.List<Users> usersList, java.util.List<Books> booksList, Map borrowedMap  ) {
+    public static java.util.List<Users> addUser(java.util.List<Users> usersList, java.util.List<Books> booksList, Map borrowedMap  ) {
 
         String name ="";
         String firstName ="";
@@ -242,3 +242,4 @@ public class UsersTools {
      }
 
 }
+//---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//
