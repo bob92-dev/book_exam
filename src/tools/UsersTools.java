@@ -102,7 +102,7 @@ public class UsersTools {
     }
 
 
-//---------------------------------------------  UPDATING IN DATABASE ---------------------------------------------------------------------------------------------//
+//---------------------------------------------  UPDATING DATABASE - COMMAND 4 ---------------------------------------------------------------------------------------------//
 
     public static java.util.List<Users> updateList(java.util.List<Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
         String name = "";
@@ -202,67 +202,43 @@ public class UsersTools {
 
     }
 
+//---------------------------------------------  REMOVE USER - COMMAND 5//---------------------------------------------------------------------------------------------//
 
-
- /*
- public static List <Users> removeUser (List<Users> usersList, String firstName, String name, boolean isUserTheSame){
+ public static List <Users> removeUser (List<Users> usersList,List<Books> booksList, Map borrowedMap) throws IOException {
      String name = "";
      String firstName = "";
      Integer dayBirth = 0;
      Integer monthBirth = 0;
      Integer yearBirth = 0;
 
-     Users usertoFind = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
+     Users userToRemove = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
-     // verification du même patronyme
-     do {
-         System.out.println(
-                 "=> Please enter your name:");
+     // STEP 1 = >  catch name and first name
+         System.out.println(" WARNING : YOU WILL DELETE THIS USER => enter the user name:");
          name = Tools.scanString(name);
-         usertoFind.setName(name);
+         userToRemove.setName(name);
 
-         System.out.println("Please enter your firstName: \n");
+         System.out.println("Please enter the firstName: \n");
          firstName = Tools.scanString(firstName);
-         usertoFind.setFirstName(firstName);
-         boolean isUserInuserslist=false;
-         isUserInuserslist = Tools.isSameUser(usersList, firstName, name, isUserInuserslist);
+         userToRemove.setFirstName(firstName);
 
-
-         //TODO a completer = > isuserInMapuser
-         if (isUserInuserslist == true) {
-             System.out.println("User founded. Let's update");
-             Users usertoremove = Tools.getSimilarReference(usersList,firstName, name);
-             usersList.remove(usertoremove);
-         }
-         else {
-             System.out.println("User not present in our database. You can't update it. Please type 3 to create a new user");
-             //rerun the process
+         Users similar = Tools.getSimilarReference(usersList,firstName,name);
+         if (similar==null) {
+             System.out.println("This user is not in our database");
              Order.processCmd(1, usersList,booksList,borrowedMap);
          }
-
-     } while (isUserInuserslist == false) ;
-
-
-
-
-
-
-
-
-
-        for (Users user1 : usersList) {
-             if (user1.getFirstName().equals(firstName) && user1.getName().equals(name)) {
-                 isUserTheSame = true;
-             } else {
-                 isUserTheSame = false;
-                 System.out.println("OK give us other informations");
-
-             }
+         else {
+                 usersList.remove(similar);
+                 System.out.println("This user has been removed from our database");
          }
-         return isUserTheSame;
+
+     // STEP 3 : saving of our new database
+     FilesHandler f = new FilesHandler();
+     f.writeInFile(usersList, "usersDatabase");
+     return usersList;
+
+
+     //TODO a completer = > isuserInMapuser
      }
-
-
- }*/
 
 }

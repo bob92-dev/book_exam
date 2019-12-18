@@ -102,6 +102,8 @@ public class Order {
             case 4:
                 UsersTools.updateList(usersList, booksList, borrowedMap);
                 break;
+            case 5:
+                UsersTools.removeUser(usersList, booksList, borrowedMap);
             case 6:
                 Tools.showListElement((ArrayList) usersList);
                 break;
