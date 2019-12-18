@@ -63,20 +63,20 @@ public class Tools {
                 isUserTheSame = true;
             } else {
                 isUserTheSame = false;
-                System.out.println("OK give us other informations");
+                //System.out.println("OK give us other informations");
 
             }
         }
         return isUserTheSame;
     }
 
-    public static boolean isSameBook(List<Books> booksList,String reference, String title, int publishedYear,String editorName, boolean isBookTheSame) {
-        for (Books book : booksList) {
-            if (book.getReference().equals(reference)) {
+    public static boolean isSameBook(List<Books> booksList, String reference, boolean isBookTheSame) {
+        for (Books book1 : booksList) {
+            if (book1.getReference().equals(reference)) {
                 isBookTheSame = true;
             } else {
                 isBookTheSame = false;
-                System.out.println("OK give us other informations");
+                //System.out.println("OK give us other informations");
 
             }
         }
@@ -92,6 +92,30 @@ public class Tools {
         }
         return null;
     }
+
+
+    public static Books getSimilarReferenceForBook(List<Books> booksList, String reference) {
+        for (Books book1 : booksList) {
+            if (book1.getReference().equals(reference)) {
+                return book1;
+            }
+        }
+        return null;
+    }
+
+     public static void checkReference (String reference){
+            if (reference.length()!=4){
+                System.out.println("Check your entry the reference must be one letter followed by 3 numbers");
+            }
+
+        }
+
+
+
+
+
+
+
 
     public static void showListElement (ArrayList theList){
         for(int i=0; i<theList.size(); i++)

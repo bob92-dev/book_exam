@@ -2,6 +2,7 @@ package coreSystem;
 
 
 import objects.Books;
+import tools.BooksTools;
 import tools.FilesHandler;
 import objects.Users;
 import tools.Tools;
@@ -107,9 +108,18 @@ public class Order {
             case 6:
                 Tools.showListElement((ArrayList) usersList);
                 break;
-            //case 10 :
-            //  Tools.showListElement((ArrayList) booksList);
-
+            case 7:
+                BooksTools.addBook(usersList,booksList,borrowedMap);
+                break;
+            case 8:
+                BooksTools.editBook(usersList,booksList,borrowedMap);
+                break;
+            case 9:
+                BooksTools.removeBook(usersList,booksList,borrowedMap);
+                break;
+            case 10 :
+                Tools.showListElement((ArrayList) booksList);
+                break;
 
         }
     }

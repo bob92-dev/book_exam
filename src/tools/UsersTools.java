@@ -46,6 +46,7 @@ public class UsersTools {
         do {
 
             try {
+
                 System.out.println("Please enter the day of your birth (between 1 and 31 included): \n");
                 dayBirth = Tools.scanInt(dayBirth);
 
@@ -149,6 +150,21 @@ public class UsersTools {
         do {
 
             try {
+
+                System.out.println("Please confirm your name: \n");
+                name = Tools.scanString(name);
+                userUpdated.setName(name);
+
+                System.out.println("Please confirm your first name");
+                firstName = Tools.scanString(firstName);
+                userUpdated.setFirstName(firstName);
+
+                // new check of user name and firts name
+                isUserInuserslist = Tools.isSameUser(usersList, firstName, name, isUserInuserslist);
+                if (isUserInuserslist == true){
+                    System.out.println("this user already exists. please type 3 ");
+                    break;
+                }
                 System.out.println("Please update your birthday): \n");
                 dayBirth = Tools.scanInt(dayBirth);
 
@@ -158,7 +174,7 @@ public class UsersTools {
                 userUpdated.setBirthDay(dayBirth);
 
             } catch (NoSuchElementException eNse) {
-                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included");
+                System.out.println("Not a number. Please enter a valid number that is to say between 1 and 31 included"+ eNse.getCause());
             }
 
         } while (dayBirth <= 0 || dayBirth > 31);

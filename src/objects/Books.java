@@ -92,12 +92,7 @@ public class Books {
         return Objects.hash(getTitle(), getPublishedYear(), getEditorName(), getReference());
     }
 
-    // that's our addbook
-    // TODO fonction à revoir
-
-
-
-
 
 
 }
+//---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//
