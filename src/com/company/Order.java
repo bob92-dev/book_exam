@@ -81,36 +81,49 @@ public class Order {
     public static void processCmd(int cmdNumber, List <Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
 
 
-            //try {
-                switch (cmdNumber) {
-                    case 1:
-                        System.out.println("help case");
-                        Order.help();
-                        break;
+        //try {
+        switch (cmdNumber) {
+            case 1:
+                System.out.println("help case");
+                Order.help();
+                break;
 
-                    case 2:
-                        System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
-                        break;
+            case 2:
+                System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
+                break;
 
-                    case 3:
-                         Users.addIt(usersList,booksList,borrowedMap);
-                         break;
+            case 3:
+                UsersTools.addIt(usersList, booksList, borrowedMap);
+                break;
 
-                    case 4 :
-                        Users.updateList(usersList, booksList, borrowedMap);
-                        break;
-                    case 6 :
-                        Tools.showListElement((ArrayList) usersList);
-                        break;
-                    //case 6 :
-                      //  Tools.showListElement((ArrayList) booksList);
+            case 4:
+                UsersTools.updateList(usersList, booksList, borrowedMap);
+                break;
+            case 6:
+                Tools.showListElement((ArrayList) usersList);
+                break;
+            //case 6 :
+            //  Tools.showListElement((ArrayList) booksList);
 
 
+        }
+    }
+    
 
-                }
+    public static void endApp (List <Users> usersList, List<Books> booksList, Map borrowedMap){
+        //Inscription des données dans les databases
+        FilesHandler database = new FilesHandler();
+        String usersDatabase = "usersDatabase";
+        String borrowersDatabase= "borrowersDatabase";
+        String booksDatabase ="booksDatabase";
 
-           // } catch (Exception e) {
-           //     throw new LibraryException("Typing error. Please enter a valid number : between 1 and 15. See the helping configuration below ", e.getCause());
-           // }
+        database.writeInFile(usersList,usersDatabase);
+        database.readFile(usersDatabase);
+
+        database.writeInFile(booksList,booksDatabase);
+        database.readFile(booksDatabase);
+
+        database.writeInFileMap(borrowedMap,borrowersDatabase);
+        database.readFile(usersDatabase);
     }
 }

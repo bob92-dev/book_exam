@@ -18,20 +18,7 @@ public class Main {
 
         Order.init();
 
-        // catch the order
-        
-
-    // introduction of datas of our databases in our programm
-
-        //String firstName;
-        //String name;
-        //Users user = new Users(firstName, name, int day, int month, int year);
-
-
-
-
-
-
+        //il faut relier les database crées enb init aux arrylist
 
          // run the process ina boucle wheenver the exist function is not asked
         //TODO : gestion de l'exception à revoir. Ca plante.
@@ -39,37 +26,10 @@ public class Main {
         //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
 
         Order.runApp(cmdNum,usersList,booksList,borrowedMap) ;
-        /*
 
-        do {
-
-            cmdNum = Tools.getChoice();
-                try {
-        Order.processCmd(cmdNum, usersList, borrowedMap);
-            } catch (LibraryException message) {
-                System.out.println(message);
-            }
-            }while (cmdNum!=2);
-*/
-        // test pour savoir si les données sont bien enregistrées
-        //System.out.println(userslist.toString());
+        Order.endApp(usersList,booksList,borrowedMap);
 
 
-
-        //Inscription des données dans les databases
-        FilesHandler database = new FilesHandler();
-        String usersDatabase = "usersDatabase";
-        String borrowersDatabase= "borrowersDatabase";
-        String booksDatabase ="booksDatabase";
-
-        database.writeInFile(usersList,usersDatabase);
-        database.readFile(usersDatabase);
-
-        database.writeInFile(booksList,booksDatabase);
-        database.readFile(booksDatabase);
-
-        database.writeInFileMap(borrowedMap,borrowersDatabase);
-        database.readFile(usersDatabase);
     }
 
 }
