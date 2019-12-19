@@ -2,6 +2,7 @@ package coreSystem;
 
 
 import objects.Books;
+import objects.Borrows;
 import tools.*;
 import objects.Users;
 
@@ -113,9 +114,11 @@ public class Order {
             case 9:
                 BooksTools.removeBook(usersList,booksList,borrowedList);
                 break;
-            case 10 :
+            case 10:
                 Tools.showListElement((ArrayList) booksList);
                 break;
+            case 11:
+                BorrowsTools.createBorrow(usersList,booksList,borrowedList);
 
         }
     }

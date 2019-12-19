@@ -2,12 +2,10 @@ package coreSystem;
 
 import objects.Books;
 import objects.Users;
-import tools.Borrows;
+import objects.Borrows;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 

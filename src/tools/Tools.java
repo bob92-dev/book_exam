@@ -1,6 +1,7 @@
 package tools;
 
 import objects.Books;
+import objects.Borrows;
 import objects.Users;
 
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class Tools {
 
     }
 
+    //---------------------------------------- Scanner method  --------------------------------------------------------------------------------//
+
     public static int scanInt(int a) {
         Scanner sc2 = new Scanner(System.in);
         a = sc2.nextInt();
@@ -56,6 +59,7 @@ public class Tools {
         return st;
     }
 
+//---------------------------------------- Methods to check the presence of an a element in a list  --------------------------------------------------------------------------------//
 
     public static boolean isSameUser(List<Users> usersList, String firstName, String name, boolean isUserTheSame) {
         for (Users user1 : usersList) {
@@ -72,12 +76,11 @@ public class Tools {
     }
 
 
-
-    public static boolean isheInThirdList (List<Borrows>borrowedList, String firstName, String name, boolean  isHeIn) {
+    public static boolean isheInThirdList(List<Borrows> borrowedList, String firstName, String name, boolean isHeIn) {
         for (Borrows borrower : borrowedList) {
             if (borrower.getBorrowerFirstName().equals(firstName) && borrower.getBorrowerName().equals(name)) {
                 isHeIn = true;
-                break;
+                return isHeIn;
             } else {
                 isHeIn = false;
             }
@@ -87,9 +90,9 @@ public class Tools {
 
 
     //TODO : verifie ca
-    public static boolean isTheBookInThirdList (List<Borrows>borrowedList, String bookReference, boolean isHeIn) {
+    public static boolean isTheBookInThirdList(List<Borrows> borrowedList, String bookReference, boolean isHeIn) {
         for (Borrows borrow : borrowedList) {
-            if (borrow.getBookReference().equals(bookReference)&&(borrow.getBorrowReturn()!=null) {
+            if (borrow.getBookReference().equals(bookReference) && (borrow.getBorrowReturn() != null)) {
                 isHeIn = true;
                 break;
             } else {
@@ -98,7 +101,6 @@ public class Tools {
         }
         return isHeIn;
     }
-
 
     public static boolean isSameBook(List<Books> booksList, String reference, boolean isBookTheSame) {
         for (Books book1 : booksList) {
@@ -134,20 +136,59 @@ public class Tools {
         return null;
     }
 
-     public static void checkReference (String reference){
-            if (reference.length()!=4){
-                System.out.println("Check your entry the reference must be one letter followed by 3 numbers");
-            }
 
+    public static void checkReference(String reference) {
+        if (reference.length() != 4) {
+            System.out.println("Check your entry the reference must be one letter followed by 3 numbers");
         }
 
+    }
+
+    //---------------------------------------- show list element --------------------------------------------------------------------------------//
 
 
-
-    public static void showListElement (ArrayList theList){
-        for(int i=0; i<theList.size(); i++)
+    public static void showListElement(ArrayList theList) {
+        for (int i = 0; i < theList.size(); i++)
             System.out.println(theList.get(i));
     }
 
+//---------------------------------------- Switch attribute methods  --------------------------------------------------------------------------------//
+
+
+    // methods to replace one attribute if null of a book by another one
+    public static void switchBookStringAttributes(Books newVersion, Books OldVersion, String attribute) {
+        //if (attribute == null) {
+            switch (attribute) {
+                case "title":
+                    newVersion.setTitle(OldVersion.getTitle());
+                    break;
+                case "editorName":
+                    newVersion.setEditorName(OldVersion.getEditorName());
+                    break;
+                case "bookReference":
+                    newVersion.setReference(OldVersion.getReference());
+                    break;
+            }
+        /*} else {
+            switch (attribute) {
+                case "title":
+                    newVersion.setTitle(attribute);
+                    break;
+                case "editorName":
+                    newVersion.setEditorName(attribute);
+                    break;
+                case "reference":
+                    newVersion.setReference(attribute);
+                    break;
+            }*/
+        }
+
+
+    /* not used:
+    public static void switchBooksNullIntattributes (Books newVersion, Books OldVersion, Integer attribute){
+            if (attribute == null) {
+                newVersion.setPublishedYear(OldVersion.getPublishedYear());
+            }
+    }*/
 }
 //---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//

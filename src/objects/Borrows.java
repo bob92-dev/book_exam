@@ -1,9 +1,6 @@
-package tools;
+package objects;
 
-import com.company.IAddIt;
-
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Borrows  {
@@ -12,6 +9,8 @@ public class Borrows  {
     private String bookReference;
     private String borrowDate;
     private String borrowReturn;
+
+
 // -------------------------------------------- CONSTRUCTOR------------------------------------------------------------//
 
     /**

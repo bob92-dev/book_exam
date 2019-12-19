@@ -2,13 +2,11 @@ package tools;
 
 import coreSystem.Order;
 import objects.Books;
+import objects.Borrows;
 import objects.Users;
 
-import javax.tools.Tool;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class BooksTools {
@@ -85,75 +83,95 @@ public class BooksTools {
         int publishedYear = 0;
         String editorName = "";
         String reference = "";
-        boolean isHeIn=false;
+        boolean isHeIn = false;
+        boolean isBookTheSame = false;
 
         Books bookUpdated = new Books(title, publishedYear, editorName, reference);
 
-        boolean isBookTheSame = false;
 
-            System.out.println("You want to update a book" +
-                    "=> Please enter the reference of your book:");
-            reference = Tools.scanString(reference);
-            bookUpdated.setReference(reference);
+        System.out.println("you want to update a book");
+        System.out.println("Please enter the reference of your book:");
+        reference = Tools.scanString(reference);
+        bookUpdated.setReference(reference);
 
-        isHeIn = Tools.isTheBookInThirdList(borrowedList,reference,isHeIn);
-        if (isHeIn=true){
+        // check if the book is in the third table and enable operation is it true.
+        isHeIn = Tools.isTheBookInThirdList(borrowedList, reference, isHeIn);
+        if (isHeIn == true) {
             System.out.println("User founded in borrower database.Impossible to remove it.Return to help.");
-            Order.processCmd(1, usersList,booksList,borrowedList);
+            Order.processCmd(1, usersList, booksList, borrowedList);
         }
-
-
-
+        else {
             isBookTheSame = Tools.isSameBook(booksList, reference, isBookTheSame);
-
-            if (isBookTheSame == true) {
-                System.out.println("Book found. Let's update");
-            } else {
+            // we get the old book
+            if (isBookTheSame == false) {
                 System.out.println("Book is not present in our database. You can't update it. Please type 7 to create a new book");
                 //rerun the process
-                Order.processCmd(1, usersList, booksList,  borrowedList );
-            }
+                Order.processCmd(1, usersList, booksList, borrowedList);
+            } else {
+
+                System.out.println("Book found. Let's update");
+                // we finally update datas
+                try {
+
+                    Books bookOldVersion = Tools.getSimilarReferenceForBook(booksList, reference);
+
+                    System.out.println("Please confirm your reference: \n");
+                    reference = Tools.scanString(reference);
+                    if (reference==null){
+                        bookUpdated.setReference(bookOldVersion.getReference());
+                    }
+                    else {
+                        bookUpdated.setReference(reference);
+                    }
+
+                    System.out.println("Please update the title");
+                    title = Tools.scanString(title);
+                    if (title==null){
+                        bookUpdated.setTitle(bookOldVersion.getTitle());
+                    }
+                    else{
+                        bookUpdated.setTitle(title);
+                    }
+
+
+                    System.out.println("Please update your the editor name): \n");
+                    editorName = Tools.scanString(editorName);
+                    if (editorName==null){
+                        bookUpdated.setEditorName(bookOldVersion.getEditorName());
+                    }
+                    else{
+                        bookUpdated.setEditorName(editorName);
+                    }
 
 
 
+                    try {
+                        do {
 
-        // UPDATING DATAS
+                            System.out.println("Please update the year of publication: enter a number");
+                            publishedYear = Tools.scanInt(publishedYear);
 
-        try {
-            System.out.println("Please confirm your reference: \n");
-            reference = Tools.scanString(reference);
-            bookUpdated.setReference(reference);
+                            if (publishedYear > 2019) {
+                                System.out.println("We don't believe in space time travel. Please type a real date");
+                            }
+                        } while (publishedYear > 2019);
+                        bookUpdated.setPublishedYear(publishedYear);
 
-            System.out.println("Please update the title");
-            title = Tools.scanString(title);
-            bookUpdated.setTitle(title);
-
-            System.out.println("Please update your the editor name): \n");
-            editorName = Tools.scanString(editorName);
-            bookUpdated.setEditorName(editorName);
-        } catch (Exception ex) {
-            System.out.println("problem with your updating. Please retry" + ex.getCause());
-        }
-
-        try {
-            do {
-                System.out.println("Please update the year of publication: enter a number");
-                publishedYear = Tools.scanInt(publishedYear);
-                if (publishedYear > 2019) {
-                    System.out.println("We don't believe in space time travel. Please type a real date");
+                    } catch (NoSuchElementException eNse) {
+                        System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+                    }
+                    System.out.println(bookOldVersion + "ligne de test avant remove old version");
+                    booksList.remove(bookOldVersion);
+                    System.out.println(booksList + "ligne de test apress remove de bookoldversion");
+                } catch (Exception ex) {
+                    System.out.println("problem with your updating. Please retry" + ex.getCause());
                 }
-            } while (publishedYear > 2019);
-            bookUpdated.setPublishedYear(publishedYear);
-
-        } catch (NoSuchElementException eNse) {
-            System.out.println("Not a number. Please enter a valid number that is to say between 1 and 12 included");
+                booksList.add(bookUpdated);
+                System.out.println(booksList);
+                FilesHandler f = new FilesHandler();
+                f.writeInFile(booksList, "booksDatabase");
+            }
         }
-
-
-        booksList.add(bookUpdated);
-        System.out.println(booksList);
-        FilesHandler f = new FilesHandler();
-        f.writeInFile(booksList, "booksDatabase");
         return booksList;
     }
 
@@ -195,6 +213,8 @@ public class BooksTools {
         f.writeInFile(booksList, "booksDatabase");
         return booksList;
     }
+
+
 }
 
 
