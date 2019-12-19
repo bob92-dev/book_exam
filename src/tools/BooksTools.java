@@ -9,10 +9,22 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+
+/**
+ * This class deals with all the commands applied who have an impact on our user database
+ */
+
 public class BooksTools {
 
     //--------------------------------------------- ADDBOOK - INPUT - IN DATABASE - COMMAND 7---------------------------------------------------------------------------------------------//
 
+    /**
+     * Method to add abbok. Check if the reference is in the booklist, then set all the new informations in the database
+     * @param usersList list of users
+     * @param booksList list of books
+     * @param borrowedList list of borrowing (users, books, dates of begin and return)
+     * @return a list of book updated
+     */
     public static List<Books> addBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) {
         String title = "";
         int publishedYear = 0;
@@ -23,7 +35,7 @@ public class BooksTools {
 
         Books book = new Books(title, publishedYear, editorName, reference);
 
-        // check if the reference is the booklist
+        // check if the reference is in the booklist
         do {
         System.out.println("Enter the reference of the book : 1 letter followed by 3 numbers (example :B218)");
         reference = Tools.scanString(reference);
@@ -59,7 +71,6 @@ public class BooksTools {
 
             book.setPublishedYear(publishedYear);
 
-
             System.out.println("Please enter the name of the editor : \n");
             editorName = Tools.scanString(editorName);
             book.setEditorName(editorName);
@@ -77,6 +88,14 @@ public class BooksTools {
 
     //---------------------------------------------  EDIT BOOK - UPDATING DATABASE - COMMAND 8 ---------------------------------------------------------------------------------------------//
 
+    /**
+     * Rewrite the book informations if it's in the database
+     * @param usersList list of users
+     * @param booksList liust of books
+     * @param borrowedList list of borrowing
+     * @return list of book
+     * @throws IOException
+     */
 
     public static List<Books> editBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList ) throws IOException {
         String title = "";
@@ -178,6 +197,14 @@ public class BooksTools {
 
     //---------------------------------------------  REMOVEBOOK - COMMAND 9//---------------------------------------------------------------------------------------------//
 
+    /**
+     * Delete a book from our database.
+     * @param usersList list of users
+     * @param booksList list of books
+     * @param borrowedList liste of borrowing
+     * @return a list updated of books
+     * @throws IOException in/out exception due to the datase written in text files
+     */
     public static List<Books> removeBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) throws IOException {
         String title = "";
         int publishedYear = 0;

@@ -11,13 +11,13 @@ import java.util.Scanner;
 public class FilesHandler {
 
     /**
-     * this method create the database, as a csv file (if it doesn't exist). It is called in the init function.
+     * this method create the database, as a text file (if it doesn't exist). It is called in the init function.
      *
-     * @throws IOException
+     * @throws IOException due to presence of interactions with files
      */
     public void createFile(String databaseName) throws IOException {
 
-        File database = new File(databaseName + ".txt");
+        File database = new File("/Users/boriscassel/IdeaProjects/books_exam/src/database/"+databaseName + ".txt");
         // check if the file exist
         if (!database.exists()) {
 
@@ -37,7 +37,7 @@ public class FilesHandler {
     public void readFile(String databaseName) {
 
         try {
-            File f = new File(databaseName + ".txt");
+            File f = new File("/Users/boriscassel/IdeaProjects/books_exam/src/database/"+databaseName + ".txt");
             Scanner myReader = new Scanner(f);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -52,9 +52,6 @@ public class FilesHandler {
     }
 
 
-    //TODO vérifier ce bout de code, notamment ligne myWriter.write(String.valueOf(myDataList));
-    //TODO a changer dans le main l'ordre d ecreation de slistes qui empeche de reverser leslistes existantes dans les listes crées
-
     /**
      * this method is build for writing and saving our data in our database.txt
      *
@@ -63,7 +60,7 @@ public class FilesHandler {
     public void writeInFile(List myDataList, String databaseName) {
 
         try {
-            FileWriter myWriter = new FileWriter(databaseName + ".txt");
+            FileWriter myWriter = new FileWriter("/Users/boriscassel/IdeaProjects/books_exam/src/database/"+databaseName + ".txt");
             // pas sur de ce bout de code là.
             myWriter.write(String.valueOf(myDataList));
             myWriter.close();

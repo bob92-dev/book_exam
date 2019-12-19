@@ -26,10 +26,3 @@ public class LibraryException extends Exception {
     }
 }
 
-
-
-
-
-
-    // TODO : mettre l'exception librairie au clair dans ma méthode cmdNumber de Order
-

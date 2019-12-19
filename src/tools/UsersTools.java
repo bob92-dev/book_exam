@@ -9,11 +9,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class deals with all the commands applied who have an impact on our users database
+ *
+ */
+
+
+
 public class UsersTools {
 
 //--------------------------------------------- CREATION OF USERS - INPUT - IN DATABASE - COMMAND 3---------------------------------------------------------------------------------------------//
 
-
+    /**
+     * THis method checked if a user is already in a database and then, if not, write it in the database.
+     * @param usersList list of users
+     * @param booksList list of books
+     * @param borrowedList list of borrowed
+     * @return a list of user updated
+     */
     public static java.util.List<Users> addUser(java.util.List<Users> usersList, java.util.List<Books> booksList,List<Borrows> borrowedList) {
 
         String name ="";
@@ -36,7 +49,7 @@ public class UsersTools {
         user.setFirstName(firstName);
 
 
-        // ca ca marche pour dsortir
+
         isUserTheSame = Tools.isSameUser(usersList, firstName, name, isUserTheSame);
         if (isUserTheSame == true) {
             System.out.println("This user already exist. Please retry with another name.");
@@ -95,7 +108,7 @@ public class UsersTools {
         } while (yearBirth <= 0 || yearBirth < 1900 || yearBirth > 2019);
 
 
-        // ajout utilisateur à la liste
+        // add user to the list
         usersList.add(user);
         //sauvagarde de la liste dans la database avec le nouvel utilisateur
         FilesHandler f = new FilesHandler();
@@ -106,8 +119,21 @@ public class UsersTools {
 
 
 //---------------------------------------------  UPDATING DATABASE - COMMAND 4 ---------------------------------------------------------------------------------------------//
- // TODO pour un nom bidon, il me dit par défaut qu'il est in borrower database. Etrange
 //TODO : en cas d'usernonfounded ca imprime deux fois le help et la deuxiéme fois ca renvoie vers enter youir name dircet au lieu du help. la premierer impression en revanche va vers le Pleasetype 3
+//TODO A REVOIR
+
+
+    /**
+     * this method update our database of users
+     * @param usersList list of users
+     * @param booksList list of books
+     * @param borrowedList list of borrows object
+     * @return list of users
+     * @throws IOException
+     */
+
+
+
     public static List<Users> editUser(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) throws IOException {
         String name = "";
         String firstName = "";
@@ -119,9 +145,8 @@ public class UsersTools {
 
         Users userUpdated = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
-        //rcehercher un utilisateur avec exactement le patronyme utilisé
 
-        // verification du même patronyme
+
         //do {
             System.out.println("You want to update a user" +
                     "=> Please enter your name:");
@@ -132,7 +157,7 @@ public class UsersTools {
             firstName = Tools.scanString(firstName);
             userUpdated.setFirstName(firstName);
             isHeIn = Tools.isheInThirdList(borrowedList, firstName, name, isHeIn);
-            // en cas d'emprunt impossible d'updater
+            // if he borrows, not possible to update
             if (isHeIn == true) {
                 System.out.println("User founded in borrower database.Impossible to update.Return to help.");
                 Order.processCmd(1, usersList, booksList, borrowedList);
@@ -219,7 +244,6 @@ public class UsersTools {
                 f.writeInFile(usersList, "usersDatabase");
 
             }
-            // UPDATING DATAS
 
             return usersList;
 
@@ -227,6 +251,14 @@ public class UsersTools {
 
 //---------------------------------------------  REMOVE USER - COMMAND 5//---------------------------------------------------------------------------------------------//
 
+    /**
+     * this method remove a user after checking if he is present in the database
+     * @param usersList list of users
+     * @param booksList list of books
+     * @param borrowedList list of borrowed
+     * @return list of users
+     * @throws IOException
+     */
  public static List <Users> removeUser (List<Users> usersList,List<Books> booksList, List<Borrows> borrowedList ) throws IOException {
      String name = "";
      String firstName = "";
@@ -272,7 +304,6 @@ public class UsersTools {
      return usersList;
 
 
-     //TODO a completer = > isuserInMapuser
      // TODO imporetant a faire : remplacement des blancs par un switch value
      }
 

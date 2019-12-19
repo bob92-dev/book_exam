@@ -13,24 +13,16 @@ public class Users {
 // -------------------------------------------- CONSTRUCTOR------------------------------------------------------------//
 
     /**
-     * constructor method. Initialization.
+     * constructor method.
      *
-     * @param firstName
-     * @param name
-     * @param birthDay
-     * @param birthMonth
-     * @param birthYear
+     * @param firstName first name of user
+     * @param name name of user
+     * @param birthDay day of birth of the user
+     * @param birthMonth month of birth of the user
+     * @param birthYear year of birth of the user
      */
     public Users(String firstName, String name, int birthDay, int birthMonth, int birthYear) {
-        /*if (birthDay < 32) {
-            throw new LibraryException("Please enter a number between 1 and 31 (included)");
-        }
-        if (birthMonth < 13) {
-            throw new LibraryException("Please enter a number between 1 and 31 (included)");
-        }
-        if (birthYear < 1919 || birthYear > 2019) {
-            throw new LibraryException("Impossible year of birth. Please enter a valid one.");
-        } else {*/
+
         this.firstName = firstName;
         this.name = name;
         this.birthDay = birthDay;
@@ -38,8 +30,102 @@ public class Users {
         this.birthYear = birthYear;
     }
 
+
+
+
+    //--------------------------------------------- GETTERS AND SETTERS ---------------------------------------------------------------------------------------------//
+
+    /**
+     * getter of user first name
+     * @return String first name
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * setter of user first name
+     * @param firstName of the user
+     */
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * getter of the user name
+     * @return string name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * setter of user name
+     * @param name of the user
+     */
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * getter of the day of birth
+     * @returnint birtday
+     */
+
+    public int getBirthDay() {
+        return birthDay;
+    }
+
+    /**
+     * setter of birthday
+     * @param birthDay
+     */
+    public void setBirthDay(int birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    /**
+     * getter of thge mont of birth
+     * @return int birthmonth
+     */
+    public int getBirthMonth() {
+        return birthMonth;
+    }
+
+    /**
+     * setter of birtmonth
+     * @param birthMonth
+     */
+
+    public void setBirthMonth(int birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    /**
+     * getter of birth year
+     * @return int birth year
+     */
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    /**
+     * setter of birth year. no return
+     * @param birthYear
+     */
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
+    }
+
+
+
     //-----------------------------------------------   OVERIDING ---------------------------------------------------------------------------------------------------------------//
-    //overidal of the to string sclass
+    /**
+     *  Rewriting of toString method sa as to cast (or access)  other types objects
+     */
     @Override
     public String toString() {
         return "Users{" +
@@ -51,10 +137,12 @@ public class Users {
                 '}';
     }
 
-    // equals a verifier
-    //TODO a verifier le rewriting de la classe equals
 
-
+    /**
+     * Rewriting of the equals method that let us compare objects
+     * @param o object
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,52 +155,16 @@ public class Users {
                 getName().equals(users.getName());
     }
 
+    /**
+     Rewriting of the the method that deal with the memory
+     * @return int code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getFirstName(), getName(), getBirthDay(), getBirthMonth(), getBirthYear());
     }
 
 
-    //--------------------------------------------- GETTERS AND SETTERS ---------------------------------------------------------------------------------------------//
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(int birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public int getBirthMonth() {
-        return birthMonth;
-    }
-
-    public void setBirthMonth(int birthMonth) {
-        this.birthMonth = birthMonth;
-    }
-
-    public int getBirthYear() {
-        return birthYear;
-    }
-
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
-    }
 
 
 

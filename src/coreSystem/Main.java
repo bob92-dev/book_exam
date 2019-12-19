@@ -7,6 +7,14 @@ import objects.Borrows;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This is the main class of our application named "library".
+ * This class is the entry point of our programm : it initialize,run, and close our application
+ */
+
+
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -14,21 +22,18 @@ public class Main {
         List<Users> usersList = new ArrayList<Users>();
         List<Books> booksList = new ArrayList<Books>();
         List <Borrows> borrowedList = new ArrayList<Borrows>();
+
+        // initialisation of the command at one to call the help
         int cmdNum =1;
+
 
         Order.init();
 
-        //il faut relier les database crées enb init aux arrylist
-
-         // run the process ina boucle wheenver the exist function is not asked
-        //TODO : gestion de l'exception à revoir. Ca plante.
-        // TODO : voir s'il faut rajouter la booksList au CMD.
-        //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
+        //TODO il faut relier les database crées enb init aux arrylist
+        // TODO run the process ina boucle wheenver the exist function is not asked
 
         Order.runApp(cmdNum,usersList,booksList,borrowedList) ;
-
         Order.endApp(usersList,booksList,borrowedList);
-
 
     }
 

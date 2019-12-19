@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="books_exam.jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="books_exam.jar">
+      <element id="module-output" name="books_exam" />
+    </root>
+  </artifact>
+</component>
