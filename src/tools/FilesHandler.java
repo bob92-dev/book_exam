@@ -74,20 +74,4 @@ public class FilesHandler {
         }
     }
 
-
-    public void writeInFileMap(Map borrowedMap, String borrowersDatabase) {
-
-
-        try {
-            FileWriter myWriter = new FileWriter(borrowersDatabase + ".txt");
-            // pas sur de ce bout de code là.
-            myWriter.write(String.valueOf(borrowedMap));
-            myWriter.close();
-            System.out.println("Successfully saved in the database.");
-        } catch (IOException e) {
-            System.out.println("An error occurred");
-            e.printStackTrace();
-        }
-
-    }
 }

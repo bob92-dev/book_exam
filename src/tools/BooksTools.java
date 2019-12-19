@@ -15,11 +15,13 @@ public class BooksTools {
 
     //--------------------------------------------- ADDBOOK - INPUT - IN DATABASE - COMMAND 7---------------------------------------------------------------------------------------------//
 
-    public static List<Books> addBook(List<Users> usersList, List<Books> booksList, Map borrowedMap) {
+    public static List<Books> addBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) {
         String title = "";
         int publishedYear = 0;
         String editorName = "";
         String reference = "";
+        boolean isBookTheSame = false;
+
 
         Books book = new Books(title, publishedYear, editorName, reference);
 
@@ -32,12 +34,12 @@ public class BooksTools {
 
         book.setReference(reference);
 
-        boolean isBookTheSame = false;
+
         isBookTheSame = Tools.isSameBook(booksList, reference, isBookTheSame);
 
         if (isBookTheSame == true) {
             System.out.println("This book already exist in our database. Please retry with another reference.");
-            Order.runApp(1, usersList, booksList, borrowedMap);
+            Order.runApp(1, usersList, booksList, borrowedList );
         } else {
             System.out.println("Enter the title of the book \n");
             title = Tools.scanString(title);
@@ -78,11 +80,12 @@ public class BooksTools {
     //---------------------------------------------  EDIT BOOK - UPDATING DATABASE - COMMAND 8 ---------------------------------------------------------------------------------------------//
 
 
-    public static List<Books> editBook(List<Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
+    public static List<Books> editBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList ) throws IOException {
         String title = "";
         int publishedYear = 0;
         String editorName = "";
         String reference = "";
+        boolean isHeIn=false;
 
         Books bookUpdated = new Books(title, publishedYear, editorName, reference);
 
@@ -93,16 +96,22 @@ public class BooksTools {
             reference = Tools.scanString(reference);
             bookUpdated.setReference(reference);
 
-            isBookTheSame = Tools.isSameBook(booksList, reference, isBookTheSame);
+        isHeIn = Tools.isTheBookInThirdList(borrowedList,reference,isHeIn);
+        if (isHeIn=true){
+            System.out.println("User founded in borrower database.Impossible to remove it.Return to help.");
+            Order.processCmd(1, usersList,booksList,borrowedList);
+        }
 
-            //TODO a completer = > isuserInMapuser
+
+
+            isBookTheSame = Tools.isSameBook(booksList, reference, isBookTheSame);
 
             if (isBookTheSame == true) {
                 System.out.println("Book found. Let's update");
             } else {
                 System.out.println("Book is not present in our database. You can't update it. Please type 7 to create a new book");
                 //rerun the process
-                Order.processCmd(1, usersList, booksList, borrowedMap);
+                Order.processCmd(1, usersList, booksList,  borrowedList );
             }
 
 
@@ -151,7 +160,7 @@ public class BooksTools {
 
     //---------------------------------------------  REMOVEBOOK - COMMAND 9//---------------------------------------------------------------------------------------------//
 
-    public static List<Books> removeBook(List<Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
+    public static List<Books> removeBook(List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) throws IOException {
         String title = "";
         int publishedYear = 0;
         String editorName = "";
@@ -177,7 +186,7 @@ public class BooksTools {
         } else {
                 System.out.println("Book not present in our database. You can't suppress it ! Please type 3 to create a new user");
                 //rerun the process
-                Order.processCmd(1, usersList, booksList, borrowedMap);
+                Order.processCmd(1, usersList, booksList,  borrowedList );
             }
 
         // STEP 3 : saving of our new data

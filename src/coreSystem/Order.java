@@ -2,16 +2,12 @@ package coreSystem;
 
 
 import objects.Books;
-import tools.BooksTools;
-import tools.FilesHandler;
+import tools.*;
 import objects.Users;
-import tools.Tools;
-import tools.UsersTools;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Order {
 
@@ -63,7 +59,7 @@ public class Order {
     }
 
 
-    public static void runApp(int cmdNum, List<Users> usersList, List<Books> booksList, Map borrowedMap ){
+    public static void runApp(int cmdNum, List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList ){
 
         do {
 
@@ -73,7 +69,7 @@ public class Order {
                 e.printStackTrace();
             }
             try {
-                Order.processCmd(cmdNum, usersList, booksList,borrowedMap);
+                Order.processCmd(cmdNum, usersList, booksList,borrowedList);
             } catch (Exception message) {
                 System.out.println(message);
             }
@@ -82,7 +78,7 @@ public class Order {
 
 
     // this function make the bridge between the typing and the process
-    public static void processCmd(int cmdNumber, List <Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
+    public static void processCmd(int cmdNumber, List <Users> usersList, List<Books> booksList, List<Borrows> borrowedList ) throws IOException {
 
 
         //try {
@@ -97,25 +93,25 @@ public class Order {
                 break;
 
             case 3:
-                UsersTools.addUser(usersList, booksList, borrowedMap);
+                UsersTools.addUser(usersList, booksList, borrowedList);
                 break;
 
             case 4:
-                UsersTools.updateList(usersList, booksList, borrowedMap);
+                UsersTools.editUser(usersList, booksList, borrowedList);
                 break;
             case 5:
-                UsersTools.removeUser(usersList, booksList, borrowedMap);
+                UsersTools.removeUser(usersList, booksList, borrowedList);
             case 6:
                 Tools.showListElement((ArrayList) usersList);
                 break;
             case 7:
-                BooksTools.addBook(usersList,booksList,borrowedMap);
+                BooksTools.addBook(usersList,booksList,borrowedList);
                 break;
             case 8:
-                BooksTools.editBook(usersList,booksList,borrowedMap);
+                BooksTools.editBook(usersList,booksList,borrowedList);
                 break;
             case 9:
-                BooksTools.removeBook(usersList,booksList,borrowedMap);
+                BooksTools.removeBook(usersList,booksList,borrowedList);
                 break;
             case 10 :
                 Tools.showListElement((ArrayList) booksList);
@@ -125,7 +121,7 @@ public class Order {
     }
 
 
-    public static void endApp (List <Users> usersList, List<Books> booksList, Map borrowedMap){
+    public static void endApp (List <Users> usersList, List<Books> booksList, List<Borrows> borrowedList){
         //Inscription des données dans les databases
         FilesHandler database = new FilesHandler();
         String usersDatabase = "usersDatabase";
@@ -138,7 +134,7 @@ public class Order {
         database.writeInFile(booksList,booksDatabase);
         database.readFile(booksDatabase);
 
-        database.writeInFileMap(borrowedMap,borrowersDatabase);
+        database.writeInFile(borrowedList,borrowersDatabase);
         database.readFile(usersDatabase);
     }
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Borrows implements IAddIt {
-    private String borrowerName;
+public class Borrows  {
     private String borrowerFirstName;
+    private String borrowerName;
     private String bookReference;
     private String borrowDate;
     private String borrowReturn;
+// -------------------------------------------- CONSTRUCTOR------------------------------------------------------------//
 
     /**
      * constructor methdo. initalization.
@@ -21,13 +22,14 @@ public class Borrows implements IAddIt {
      * @param borrowDate
      * @param borrowReturn
      */
-    public Borrows(String borrowerName, String borrowerFirstName, String bookReference, String borrowDate, String borrowReturn) {
-        this.borrowerName = borrowerName;
+    public Borrows(String borrowerFirstName, String borrowerName, String bookReference, String borrowDate, String borrowReturn) {
         this.borrowerFirstName = borrowerFirstName;
+        this.borrowerName = borrowerName;
         this.bookReference = bookReference;
         this.borrowDate = borrowDate;
         this.borrowReturn = borrowReturn;
     }
+    //---------------------------------------------- GETTERS AND SETTERS ---------------------------------------------------------------------------------------------//
 
     //getters and setters
     public String getBorrowerName() {
@@ -70,6 +72,8 @@ public class Borrows implements IAddIt {
         this.borrowReturn = borrowReturn;
     }
 
+    //-----------------------------------------------   OVERIDING ---------------------------------------------------------------------------------------------------------------//
+
     @Override
     public String toString() {
         return "Borrows{" +
@@ -96,10 +100,5 @@ public class Borrows implements IAddIt {
     @Override
     public int hashCode() {
         return Objects.hash(getBorrowerName(), getBorrowerFirstName(), getBookReference(), getBorrowDate(), getBorrowReturn());
-    }
-
-    @Override
-    public Map addIt(List usersList, Map borrowedMap) {
-        return null;
     }
 }

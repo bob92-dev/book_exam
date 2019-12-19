@@ -2,6 +2,7 @@ package coreSystem;
 
 import objects.Books;
 import objects.Users;
+import tools.Borrows;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class Main {
 	// initialize the order = > create 3 databases
         List<Users> usersList = new ArrayList<Users>();
         List<Books> booksList = new ArrayList<Books>();
-        Map borrowedMap = new HashMap();
+        List <Borrows> borrowedList = new ArrayList<Borrows>();
         int cmdNum =1;
 
         Order.init();
@@ -26,9 +27,9 @@ public class Main {
         // TODO : voir s'il faut rajouter la booksList au CMD.
         //TODO voir pourquoi il écrit uniquement dans database et pas dans les noms de databas sespécifiées
 
-        Order.runApp(cmdNum,usersList,booksList,borrowedMap) ;
+        Order.runApp(cmdNum,usersList,booksList,borrowedList) ;
 
-        Order.endApp(usersList,booksList,borrowedMap);
+        Order.endApp(usersList,booksList,borrowedList);
 
 
     }

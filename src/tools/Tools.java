@@ -61,6 +61,7 @@ public class Tools {
         for (Users user1 : usersList) {
             if (user1.getFirstName().equals(firstName) && user1.getName().equals(name)) {
                 isUserTheSame = true;
+                break;
             } else {
                 isUserTheSame = false;
                 //System.out.println("OK give us other informations");
@@ -70,10 +71,40 @@ public class Tools {
         return isUserTheSame;
     }
 
+
+
+    public static boolean isheInThirdList (List<Borrows>borrowedList, String firstName, String name, boolean  isHeIn) {
+        for (Borrows borrower : borrowedList) {
+            if (borrower.getBorrowerFirstName().equals(firstName) && borrower.getBorrowerName().equals(name)) {
+                isHeIn = true;
+                break;
+            } else {
+                isHeIn = false;
+            }
+        }
+        return isHeIn;
+    }
+
+
+    //TODO : verifie ca
+    public static boolean isTheBookInThirdList (List<Borrows>borrowedList, String bookReference, boolean isHeIn) {
+        for (Borrows borrow : borrowedList) {
+            if (borrow.getBookReference().equals(bookReference)&&(borrow.getBorrowReturn()!=null) {
+                isHeIn = true;
+                break;
+            } else {
+                isHeIn = false;
+            }
+        }
+        return isHeIn;
+    }
+
+
     public static boolean isSameBook(List<Books> booksList, String reference, boolean isBookTheSame) {
         for (Books book1 : booksList) {
             if (book1.getReference().equals(reference)) {
                 isBookTheSame = true;
+                break;
             } else {
                 isBookTheSame = false;
                 //System.out.println("OK give us other informations");
@@ -109,10 +140,6 @@ public class Tools {
             }
 
         }
-
-
-
-
 
 
 

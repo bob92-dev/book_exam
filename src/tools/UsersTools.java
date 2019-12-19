@@ -14,7 +14,7 @@ public class UsersTools {
 //--------------------------------------------- CREATION OF USERS - INPUT - IN DATABASE - COMMAND 3---------------------------------------------------------------------------------------------//
 
 
-    public static java.util.List<Users> addUser(java.util.List<Users> usersList, java.util.List<Books> booksList, Map borrowedMap  ) {
+    public static java.util.List<Users> addUser(java.util.List<Users> usersList, java.util.List<Books> booksList,List<Borrows> borrowedList) {
 
         String name ="";
         String firstName ="";
@@ -38,7 +38,7 @@ public class UsersTools {
         isUserTheSame = Tools.isSameUser(usersList, firstName, name, isUserTheSame);
         if (isUserTheSame == true) {
             System.out.println("This user already exist. Please retry with another name.");
-            Order.runApp(1, usersList,booksList, borrowedMap);
+            Order.runApp(1, usersList,booksList, borrowedList );
         }
         //} while (isUserTheSame == true) ;
 
@@ -105,13 +105,14 @@ public class UsersTools {
 
 //---------------------------------------------  UPDATING DATABASE - COMMAND 4 ---------------------------------------------------------------------------------------------//
 
-    public static java.util.List<Users> updateList(java.util.List<Users> usersList, List<Books> booksList, Map borrowedMap) throws IOException {
+    public static java.util.List<Users> editUser(java.util.List<Users> usersList, List<Books> booksList, List<Borrows> borrowedList) throws IOException {
         String name = "";
         String firstName = "";
         Integer dayBirth = 0;
         Integer monthBirth = 0;
         Integer yearBirth = 0;
         boolean isUserInuserslist=false;
+        boolean isHeIn=false;
 
         Users userUpdated = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
@@ -129,7 +130,15 @@ public class UsersTools {
             firstName = Tools.scanString(firstName);
             userUpdated.setFirstName(firstName);
 
+            // en cas d'emprunt impossible d'updater
+            isHeIn = Tools.isheInThirdList (borrowedList, firstName, name, isHeIn);
+            if (isHeIn=true){
+                System.out.println("User founded in borrower database.Impossible to update.Return to help.");
+                Order.processCmd(1, usersList,booksList,borrowedList);
+            }
+
             isUserInuserslist = Tools.isSameUser(usersList, firstName, name, isUserInuserslist);
+
             //TODO a completer = > isuserInMapuser
             if (isUserInuserslist == true) {
                 System.out.println("User founded. Let's update");
@@ -139,7 +148,7 @@ public class UsersTools {
             else {
                 System.out.println("User not present in our database. You can't update it. Please type 3 to create a new user");
                 //rerun the process
-                Order.processCmd(1, usersList,booksList,borrowedMap);
+                Order.processCmd(1, usersList,booksList,borrowedList );
             }
 
         } while (isUserInuserslist == false) ;
@@ -220,12 +229,13 @@ public class UsersTools {
 
 //---------------------------------------------  REMOVE USER - COMMAND 5//---------------------------------------------------------------------------------------------//
 
- public static List <Users> removeUser (List<Users> usersList,List<Books> booksList, Map borrowedMap) throws IOException {
+ public static List <Users> removeUser (List<Users> usersList,List<Books> booksList, List<Borrows> borrowedList ) throws IOException {
      String name = "";
      String firstName = "";
      Integer dayBirth = 0;
      Integer monthBirth = 0;
      Integer yearBirth = 0;
+     boolean isHeIn=false;
 
      Users userToRemove = new Users(firstName, name, dayBirth, monthBirth, yearBirth);
 
@@ -238,10 +248,17 @@ public class UsersTools {
          firstName = Tools.scanString(firstName);
          userToRemove.setFirstName(firstName);
 
+         //TODO : refaire le ishIn si dessous
+        isHeIn = Tools.isheInThirdList (borrowedList, firstName, name, isHeIn);
+        if (isHeIn=true){
+         System.out.println("User founded in borrower database.Impossible to remove it.Return to help.");
+         Order.processCmd(1, usersList,booksList,borrowedList);
+     }
+
          Users similar = Tools.getSimilarReference(usersList,firstName,name);
          if (similar==null) {
              System.out.println("This user is not in our database");
-             Order.processCmd(1, usersList,booksList,borrowedMap);
+             Order.processCmd(1, usersList,booksList,borrowedList );
          }
          else {
                  usersList.remove(similar);
