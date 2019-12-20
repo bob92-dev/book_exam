@@ -40,8 +40,9 @@ public class Order {
         List<Books> booksList = new ArrayList<Books>();
         List <Borrows> borrowedList = new ArrayList<Borrows>();
 
-
-
+        file.readFile(usersDatabase,usersList);
+        file.readFile(booksDatabase,booksList);
+        file.readFile(borrowersDatabase,borrowedList);
 
     }
 
@@ -113,6 +114,7 @@ public class Order {
             case 2:
                 System.out.println("You have asked to leave the application. Thanks you. We hope you've had fun.");
                 Order.endApp(usersList, booksList, borrowedList);
+                System.out.println("BYE BYE. HAVE A GOOD DAY");
                 break;
 
             case 3:
@@ -153,8 +155,13 @@ public class Order {
 
             case 13:
                 Tools.showListElement((ArrayList) borrowedList);
+                break;
 
-            //case 14
+            case 14:
+                Order.endApp(usersList, booksList, borrowedList);
+                break;
+
+
         }
     }
 
@@ -174,14 +181,15 @@ public class Order {
         // then we write in files
         database.writeInFile(usersList,usersDatabase);
         //and show the ouput
-        database.readFile(usersDatabase);
+        //database.readFile(usersDatabase);
 
         database.writeInFile(booksList,booksDatabase);
-        database.readFile(booksDatabase);
+        //database.readFile(booksDatabase);
 
         database.writeInFile(borrowedList,borrowersDatabase);
-        database.readFile(usersDatabase);
-        System.out.println("BYE BYE. HAVE A GOOD DAY");
+        //database.readFile(usersDatabase);
+        //System.out.println("BYE BYE. HAVE A GOOD DAY");
+
     }
 }
 //---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//

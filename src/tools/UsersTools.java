@@ -119,8 +119,7 @@ public class UsersTools {
 
 
 //---------------------------------------------  UPDATING DATABASE - COMMAND 4 ---------------------------------------------------------------------------------------------//
-//TODO : en cas d'usernonfounded ca imprime deux fois le help et la deuxiéme fois ca renvoie vers enter youir name dircet au lieu du help. la premierer impression en revanche va vers le Pleasetype 3
-//TODO A REVOIR
+
 
 
     /**
@@ -156,7 +155,9 @@ public class UsersTools {
             System.out.println("Please enter your firstName: \n");
             firstName = Tools.scanString(firstName);
             userUpdated.setFirstName(firstName);
+        System.out.println(isHeIn);
             isHeIn = Tools.isheInThirdList(borrowedList, firstName, name, isHeIn);
+        System.out.println(isHeIn);
             // if he borrows, not possible to update
             if (isHeIn == true) {
                 System.out.println("User founded in borrower database.Impossible to update.Return to help.");
@@ -279,13 +280,12 @@ public class UsersTools {
          userToRemove.setFirstName(firstName);
 
 
-         //TODO : refaire le ishIn si dessous
      // check in borrow database
      isHeIn = Tools.isheInThirdList (borrowedList, firstName, name, isHeIn);
         if (isHeIn=true){
          System.out.println("User founded in borrower database.Impossible to remove it.Return to help.");
          Order.processCmd(1, usersList,booksList,borrowedList);
-     }
+     } else{
 
         //check in user database
          Users similar = Tools.getSimilarReference(usersList,firstName,name);
@@ -300,12 +300,10 @@ public class UsersTools {
 
      // STEP 3 : saving of our new database
      FilesHandler f = new FilesHandler();
-     f.writeInFile(usersList, "usersDatabase");
+     f.writeInFile(usersList, "usersDatabase");}
      return usersList;
 
-
-     // TODO imporetant a faire : remplacement des blancs par un switch value
-     }
+  }
 
 }
 //---------------------------------------- END OF CLASS --------------------------------------------------------------------------------//

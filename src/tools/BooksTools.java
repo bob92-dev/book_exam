@@ -218,7 +218,6 @@ public class BooksTools {
         reference = Tools.scanString(reference);
         //bookToRemove.setReference(reference);
         isBookTheSame = Tools.isSameBook(booksList, reference, isBookTheSame);
-        //TODO a completer = > isuserInMapuser
 
         if (isBookTheSame == true) {
 

@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class FilesHandler {
@@ -34,21 +34,19 @@ public class FilesHandler {
     /**
      * this method read the database.
      */
-    public void readFile(String databaseName) {
-
+    public List readFile(String databasename, List users) {
         try {
-            File f = new File("/Users/boriscassel/IdeaProjects/books_exam/src/database/"+databaseName + ".txt");
+            File f = new File("/Users/boriscassel/IdeaProjects/books_exam/src/database/"+databasename+".txt");
             Scanner myReader = new Scanner(f);
             while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
+                users = Collections.singletonList(myReader.nextLine());
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
+        return users;
     }
 
 

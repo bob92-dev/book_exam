@@ -111,7 +111,7 @@ public class Tools {
 
     public static boolean isheInThirdList(List<Borrows> borrowedList, String firstName, String name, boolean isHeIn) {
         for (Borrows borrower : borrowedList) {
-            if (borrower.getBorrowerFirstName().equals(firstName) && borrower.getBorrowerName().equals(name)) {
+            if ((borrower.getBorrowerFirstName().equals(firstName)) && (borrower.getBorrowerName().equals(name))) {
                 isHeIn = true;
                 return isHeIn;
             } else {
